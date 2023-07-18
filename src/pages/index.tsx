@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Login from './login'
 export default function Home() {
   const router = useRouter()
-  const [user, setUser] = useState<{userName: string, age: number} | null>(null)
+  const [user, setUser] = useState<{userName: string} | null>(null)
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.localStorage){
@@ -127,5 +127,5 @@ export default function Home() {
       </main>
     )  
   }
-  return "" 
+  return;
  }
