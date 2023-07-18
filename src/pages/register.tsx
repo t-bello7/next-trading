@@ -27,6 +27,7 @@ const Register  = () => {
         if (typeof window !== 'undefined' && window.localStorage){
             localStorage.setItem('userData', JSON.stringify(userData));
             localStorage.setItem('user', JSON.stringify({username: userData['username']}))
+            router.push('/');
         }
     }
     useEffect(() => {
