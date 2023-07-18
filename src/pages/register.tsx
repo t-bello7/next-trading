@@ -38,7 +38,7 @@ const Register  = () => {
             router.push('/')
         }
     }
-    }, [])
+    }, [router])
 
     if (!user){
         return (

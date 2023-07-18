@@ -41,7 +41,7 @@ const Login  = () => {
                 router.push('/')
             }
     }
-    }, [])
+    }, [router])
     if (user) {
         return;
     }
@@ -62,7 +62,7 @@ const Login  = () => {
                         </span>
                     </button> 
                 </form>
-                <p> Don't have an account ? <Link href="/register">   Sign Up </Link> </p>
+                <p> Don&apos;t have an account ? <Link href="/register">   Sign Up </Link> </p>
             </main>)
 }
 
