@@ -8,13 +8,15 @@ export default function Home() {
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.localStorage){
-      let user = localStorage.getItem('user');
-    }
-
-    setUser(user);
-    if (!user) {
+    const user = localStorage.getItem('user');
+    console.log(user)
+    if (user === null) {
       router.push('/login')
+    } else {
+      setUser(JSON.parse(user))
     }
+  }
+
   }, [])
   if (user) {
     return (
