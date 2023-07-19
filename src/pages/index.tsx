@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-export default function Home() {
+
+
+const Home = () => {
   const router = useRouter()
   const [user, setUser] = useState<{username: string} | null>(null)
   const handleLogout = () => {
@@ -32,6 +34,7 @@ export default function Home() {
               Click the button below to logout
           </p>
           <button
+          role='submitbutton'
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
             onClick={handleLogout}>
             Logout{' '}
@@ -45,3 +48,6 @@ export default function Home() {
   }
   return;
  }
+
+
+ export default Home;
