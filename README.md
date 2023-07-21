@@ -32,3 +32,24 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+## Resources
+- http://developers.xstore.pro/documentation/2.5.0
+- https://www.xtb.com/ro
+- https://betterprogramming.pub/write-optimised-dockerfiles-for-next-js-d644b628c570
+- https://github.com/vercel/next.js/discussions/16995
+- https://www.behance.net/gallery/173665829/Exchange-Trading-Platform?tracking_source=search_projects|Trading+platform
+- https://ant.design/
+- https://codesandbox.io/examples/package/react-stockcharts
+- https://www.npmjs.com/package/react-stockcharts
+- https://medium.com/how-to-react/create-a-stock-chart-in-react-js-677be5f2f356 
+- react-highcharts
+- https://robertmarshall.dev/blog/how-to-mock-local-storage-in-jest-tests/
+
+## Assets Needed
+- stocks (stc)
+- commodities (cmd)
+- forex (fx)
+- crypto (ct)
+- indices (ind)
