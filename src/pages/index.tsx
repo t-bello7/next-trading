@@ -1,6 +1,12 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { Button } from 'antd';
+import { 
+  Button,
+  Layout,
+  Menu,
+  Radio,
+  Tabs
+} from 'antd';
 import {
   DesktopOutlined,
   FileOutlined,
@@ -8,11 +14,9 @@ import {
   TeamOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Layout, Menu, theme } from 'antd';
+import type { MenuProps, RadioChangeEvent } from 'antd';
 
 const { Header, Content, Footer, Sider } = Layout;
-
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -50,10 +54,6 @@ const  Home = () => {
   const [user, setUser] = useState<{username: string} | null>(null)
   const [collapsed, setCollapsed] = useState(true)
 
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
-
   const handleLogout = () => {
     localStorage.removeItem('user')
     router.push('/login')
@@ -83,6 +83,20 @@ const  Home = () => {
                 <code className="font-mono font-bold">{user.username}</code>
               </p>
             </div>
+            <Tabs
+              defaultActiveKey="1"
+              tabPosition="top"
+              style={{ height: 100, color: '#fff' }}
+              items={new Array(3).fill(null).map((_, i) => {
+                const id = String(i);
+                return {
+                  label: `Tab-${id}`,
+                  key: id,
+                  disabled: i === 28,
+                  children: `Content of tab ${id}`,
+                };
+              })}
+            />
             <Content >
             <div>
               <Button type="primary"  onClick={handleLogout}> Logout </Button>
