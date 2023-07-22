@@ -1,22 +1,15 @@
 /** @type {import('next').NextConfig} */
-// const withPWA = require('next-pwa');
 
-// const nextConfig = withPWA({
-//   pwa: {
-//     dest: 'public',
+import nextPWA from 'next-pwa'
+const withPWA = nextPWA({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+})
 
-//   },
-//   reactStrictMode: true,
-// });
+export default withPWA({
+  reactStrictMode: true,
+  transpilePackages: ['@react-financial-charts', 'react-financial-charts'],
+})
 
-// module.exports = nextConfig;
-
-const withPWA = require('next-pwa')({
-    dest: 'public',
-    register: true,
-    skipWaiting: true,
-  })
-  
-  module.exports = withPWA({
-    reactStrictMode: true,
-  })
+ 

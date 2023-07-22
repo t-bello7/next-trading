@@ -15,6 +15,7 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import type { MenuProps, RadioChangeEvent } from 'antd';
+import Stonk from '@/components/Stonk';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -98,6 +99,7 @@ const  Home = () => {
               })}
             />
             <Content >
+              <Stonk />
             <div>
               <Button type="primary"  onClick={handleLogout}> Logout </Button>
             </div>
