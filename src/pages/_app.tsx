@@ -1,4 +1,4 @@
-// import './globals.css';
+import './globals.css';
 import  { ConfigProvider } from 'antd';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
