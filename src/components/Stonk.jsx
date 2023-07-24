@@ -27,8 +27,10 @@ import {
   withDeviceRatio,
   withSize,
 } from "react-financial-charts";
+import useWindowSize from "@/utils/hooks/dimesions";
 
 const Stonk = () => {
+  const { width, height} = useWindowSize();
   const initialData = [
     {
       date: "2021-02-02 16:00:00",
@@ -75,8 +77,8 @@ const Stonk = () => {
     discontinuousTimeScaleProviderBuilder().inputDateAccessor(
       (d) => new Date(d.date)
     );
-  const height = 700;
-  const width = 900;
+  // const height = 300;
+  // const width = 100;
   const margin = { left: 0, right: 48, top: 0, bottom: 24 };
 
   const ema12 = ema()

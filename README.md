@@ -54,3 +54,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - forex (fx)
 - crypto (ct)
 - indices (ind)
+
+## Design
+ Colors
+ - PrimaryColor - #08d74f - rgb(8, 215, 79) - hsl(141, 93%, 44%)
+ - SecondaryColor - #FF3434 - rgb(255, 52, 52) - hsl(0, 100%, 60%)
+ - lightGray - #E8E8E8 - rgb(232, 232, 232) - hsl(0, 0%, 91%)
+ - darkblack - #181614 - rgb(24, 22, 20) - hsl(30, 9%, 9%)
+ - lightblack - #212121 - rgb(33, 33, 33) - hsl(0, 0%, 13%)

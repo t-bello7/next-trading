@@ -1,10 +1,12 @@
 import type { ThemeConfig } from "antd";
 
-const theme: ThemeConfig = {
+const customTheme: ThemeConfig = {
     token: {
-        fontSize: 20,
-        colorPrimary: '#52c41a'
+        fontSize: 16,
+        colorPrimary: '#08d74f',
+        colorBgBase: '#E8E8E8',
+        colorTextHeading: '#fff'
     }
 }
 
-export default theme;
+export default customTheme;

@@ -4,14 +4,19 @@ import {
   Button,
   Layout,
   Menu,
-  Radio,
-  Tabs
+  Tabs,
+  Row,
+  Col,
+  Switch,
+  Space
 } from 'antd';
 import {
   DesktopOutlined,
   FileOutlined,
   PieChartOutlined,
   TeamOutlined,
+  CheckOutlined,
+  CloseOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import type { MenuProps, RadioChangeEvent } from 'antd';
@@ -35,20 +40,15 @@ const getItem = (
   } as MenuItem;
 }
 
-
-
 const items: MenuItem[] = [
   getItem('Option 1', '1', <PieChartOutlined />),
   getItem('Option 2', '2', <DesktopOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [
-    getItem('Tom', '3'),
-    getItem('Bill', '4'),
-    getItem('Alex', '5'),
-  ]),
-  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
+
   getItem('Files', '9', <FileOutlined />),
 ];
 
+
+// const triggerComponenet = () => (<h1 className='bg-lightGray'> hello</h1>);
 
 const  Home = () => {
   const router = useRouter()
@@ -71,23 +71,42 @@ const  Home = () => {
   }, [router])
   if (user) {
     return (
-      <main className="bg-dark">
-        <Layout style={{ minHeight: '100vh' }}>
-          <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-            <div className="demo-logo-vertical"></div>
-            <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
-          </Sider>
-          <Layout style={{ padding: '0 16px', background: '#000' }}>
-            <div className="">
-              <p className="">
-                Welcome&nbsp;
-                <code className="font-mono font-bold">{user.username}</code>
-              </p>
+      <main>
+        <Layout>
+          <Sider className='bg-lightGray' style={{ backgroundColor: '#E8E8E8' }}collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+            <div className='flex flex-col justify-between h-full'>
+              <div>logo</div>
+            <Menu className='bg-colorPrimary' defaultSelectedKeys={['1']} mode="inline" items={items} />
+
             </div>
+            </Sider>
+          <Layout className='bg-white' style={{ width: '100%', padding: '0 16px' }}>
+          <Content style={{ background: 'bg-lightGray', minHeight:'100vh' }}>
+              <Row justify="space-between">
+                <Col>
+                Welcome&nbsp;
+                <code className="font-mono font-bold">{user.username}</code>'
+                </Col>
+                <Col>
+                <Switch
+                  checkedChildren={<CheckOutlined />}
+                  unCheckedChildren={<CloseOutlined />}
+                  defaultChecked
+                />
+                <Button className='bg-darkBlack text-white'>
+                  Deposit
+                </Button>
+                </Col>
+              </Row>
+        
+        
+              <Stonk />
+            
             <Tabs
               defaultActiveKey="1"
               tabPosition="top"
               style={{ height: 100, color: '#fff' }}
+              className='bg-lightGray'
               items={new Array(3).fill(null).map((_, i) => {
                 const id = String(i);
                 return {
@@ -98,8 +117,6 @@ const  Home = () => {
                 };
               })}
             />
-            <Content >
-              <Stonk />
             <div>
               <Button type="primary"  onClick={handleLogout}> Logout </Button>
             </div>
