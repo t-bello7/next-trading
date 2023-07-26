@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState, useEffect} from "react";
 import { format } from "d3-format";
 import { timeFormat } from "d3-time-format";
 import {
@@ -30,7 +30,20 @@ import {
 import useWindowSize from "@/utils/hooks/dimesions";
 
 const Stonk = () => {
-  const { width, height} = useWindowSize();
+  const [width, setwidth] = useState(0)
+
+  let { width: windowWidth, height} = useWindowSize();
+  height = height - 400;
+  
+  useEffect(() => {
+      if (windowWidth > 900){
+        setwidth( windowWidth * 0.6);
+      }
+      else{
+      setwidth(windowWidth-200);
+      }
+  }, [windowWidth])
+
   const initialData = [
     {
       date: "2021-02-02 16:00:00",
@@ -77,8 +90,7 @@ const Stonk = () => {
     discontinuousTimeScaleProviderBuilder().inputDateAccessor(
       (d) => new Date(d.date)
     );
-  // const height = 300;
-  // const width = 100;
+
   const margin = { left: 0, right: 48, top: 0, bottom: 24 };
 
   const ema12 = ema()
