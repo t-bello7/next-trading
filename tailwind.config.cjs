@@ -16,6 +16,10 @@ module.exports = {
       'lightBlack': '#212121',
       'white': '#FFFFFF'
     },
+    fontFamily: {
+      clashDisplay: ["clash-display"],
+      clashDisplayVariable: ["clash-display-variable"],
+    },
     extend: {},
   },
   plugins: [],

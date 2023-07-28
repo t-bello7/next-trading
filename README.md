@@ -47,6 +47,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - react-highcharts
 - http://rrag.github.io/react-stockcharts/documentation.html#/candlestick_chart
 - https://robertmarshall.dev/blog/how-to-mock-local-storage-in-jest-tests/
+- https://www.svgrepo.com/
 
 ## Assets Needed
 - stocks (stc)

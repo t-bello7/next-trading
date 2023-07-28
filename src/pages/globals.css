@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@font-face {
+    font-family: "Clash-Display";
+    src: url("../assets/fonts/clashDisplay/ClashDisplay-Regular.otf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Clash-Display-Variable";
+    src: url("../assets/fonts/clashDisplayVariable/ClashDisplay-Variable.ttf");
+    font-weight: normal;
+}

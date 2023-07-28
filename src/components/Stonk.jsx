@@ -33,7 +33,7 @@ const Stonk = () => {
   const [width, setwidth] = useState(0)
 
   let { width: windowWidth, height} = useWindowSize();
-  height = height - 400;
+  height = height-400;
   
   useEffect(() => {
       if (windowWidth > 900){
