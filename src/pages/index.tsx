@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import { 
   Button,
   Layout,
-  Tabs,
   Row,
   Col,
   Switch,
@@ -20,6 +19,7 @@ import React from 'react';
 import type { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon';
 import Stonk from '@/components/Stonk';
 import Sidebar from '@/components/Sidebar';
+import AssetWatch from '@/components/AssetWatch';
 import useWindowSize from "@/utils/hooks/dimesions";
 
 const { Header, Content, Footer } = Layout;
@@ -126,7 +126,7 @@ const DarkMoonIcon = (props: Partial<CustomIconComponentProps>) => (
 );
 
 const  Home = () => {
-  const [size, setSize] = useState<SizeType>('large'); 
+  const [size, setSize] = useState<SizeType>('large');
   const [width, setwidth] = useState(0)
   const router = useRouter()
   const [user, setUser] = useState<{username: string} | null>(null)
@@ -190,21 +190,7 @@ const  Home = () => {
                 <Stonk />
               </Col>
               <Col style={{ width: width }}>
-                <Tabs
-                  defaultActiveKey="1"
-                  tabPosition="top"
-                  style={{ height: 200 }}
-                  className='bg-lightGray rounded-lg font-clashDisplay'
-                  items={tradingAssets}
-                />
-                <Row justify="space-between">
-                <Button type="primary" shape="round" className='bg-colorPrimary font-clashDisplay' icon={<DownloadOutlined />} size={size}>
-                  Buy
-                </Button>
-                <Button type="primary" shape="round" className='bg-secondaryColor font-clashDisplay' icon={<DownloadOutlined />} size={size}>
-                  Sell
-                </Button>
-                </Row>
+                <AssetWatch />
               </Col>
             </Row>
           </Layout>
