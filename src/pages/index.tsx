@@ -1,5 +1,6 @@
-import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { useTheme } from 'next-themes';
 import { 
   Button,
   Layout,
@@ -126,6 +127,9 @@ const DarkMoonIcon = (props: Partial<CustomIconComponentProps>) => (
 );
 
 const  Home = () => {
+  const { systemTheme, theme, setTheme } = useTheme();
+  const currentThme = theme === 'system' ? systemTheme : theme;
+  const handleThemeChange = () => theme === "dark" ? setTheme("light") : setTheme("dark"); 
   const [size, setSize] = useState<SizeType>('large');
   const [width, setwidth] = useState(0)
   const router = useRouter()
@@ -173,8 +177,9 @@ const  Home = () => {
                 <Switch
                   className='bg-lightGray'
                   style={{ transform: 'rotate(90deg)',  backgroundColor: '#E8E8E8'}}
-                  checkedChildren={<BrightButtonIcon />}
-                  unCheckedChildren={<DarkMoonIcon />}
+                  unCheckedChildren={<BrightButtonIcon />}
+                  checkedChildren={<DarkMoonIcon />}
+                  onClick={handleThemeChange}
                   defaultChecked
                 />
                 <span className='font-clashDisplay'>

@@ -37,7 +37,7 @@ const Sidebar = () => {
     const [collapsed, setCollapsed] = useState(true);
 
     return (
-        <Sider style={{ backgroundColor: '#E8E8E8' }} collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+        <Sider className="bg-lightGray dark:bg-darkBlack" collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
             <Image src={logo} alt="assetxpro logos" />
             <Menu className="font-clashDisplay" defaultSelectedKeys={['1']} mode="inline" items={items} />
         </Sider>
