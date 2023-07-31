@@ -86,12 +86,12 @@ const  Home = () => {
               </Col>
             </Row>
             <Row className='flex-col gap-2'>
-            <div className='grid md:grid-cols-3 gap-4 w-full h-[50vh]'>
-    
-               <Col ref={ref} className='md:col-span-2 bg-lightGray dark:bg-darkBlack dark:text-white rounded'>
-               <Stonk width={dimWid} height={height}/> 
-               </Col>
-              <Col className=' md:col-span-1'>
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-4 w-full'>
+  
+              <Col ref={ref} className=' h-[50vh] md:col-span-2 bg-lightGray dark:bg-darkBlack dark:text-white rounded'>
+              <Stonk width={dimWid} height={height}/> 
+              </Col>
+              <Col className=' h-[50vh] md:col-span-1'>
                 <AssetWatch />
               </Col>
             </div>

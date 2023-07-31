@@ -49,6 +49,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - https://robertmarshall.dev/blog/how-to-mock-local-storage-in-jest-tests/
 - https://www.svgrepo.com/
 - https://github.com/tradingview/lightweight-charts
+- https://www.tradingview.com/widget/advanced-chart/
 
 ## Assets Needed
 - stocks (stc)

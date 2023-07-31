@@ -23,26 +23,20 @@ import {
   MouseCoordinateX,
   MouseCoordinateY,
   ZoomButtons,
-  withDeviceRatio,
-  withSize,
 } from "react-financial-charts";
-import useWindowSize from "@/utils/hooks/dimesions";
 
-const Stonk = (props) => {
-  console.log(props)
-  
+const Stonk = (props) => {  
   const [dimesions, setDimensions] = useState({
-    width: 100,
-    setWidth: 100
+    width: 400,
+    height: 400
   })
 
   useEffect(() => {
     setDimensions({
       width: props.width,
       height: props.height
-    }
-    )
-  })
+    })
+  },[props.width, props.height])
   const initialData = [
     {
       date: "2021-02-02 16:00:00",
