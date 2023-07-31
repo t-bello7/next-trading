@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTheme } from 'next-themes';
 import useDimensions from 'react-use-dimensions'
 import { 
@@ -42,22 +42,10 @@ const  Home = () => {
   const currentThme = theme === 'system' ? systemTheme : theme;
   const handleThemeChange = () => theme === "dark" ? setTheme("light") : setTheme("dark"); 
   const [size, setSize] = useState<SizeType>('large');
-  const [width, setwidth] = useState(0)
   const [user, setUser] = useState<{username: string} | null>({
     username: "hello"
   })
-
-  let { width: windowWidth } : { width: number } = useWindowSize();
-  
-  useEffect(() => {
-      if (windowWidth > 900){
-        setwidth(windowWidth * 0.3);
-      }else {
-      setwidth(windowWidth-100)
-
-      }
-  }, [windowWidth])
-  const [ref, { width: dimWid, height }] = useDimensions()
+  const [ref, { width, height }] = useDimensions()
   if (user) {
     return (
       <main>
@@ -89,7 +77,7 @@ const  Home = () => {
             <div className='grid grid-cols-1 md:grid-cols-3 gap-4 w-full'>
   
               <Col ref={ref} className=' h-[50vh] md:col-span-2 bg-lightGray dark:bg-darkBlack dark:text-white rounded'>
-              <Stonk width={dimWid} height={height}/> 
+              <Stonk width={width} height={height}/> 
               </Col>
               <Col className=' h-[50vh] md:col-span-1'>
                 <AssetWatch />
