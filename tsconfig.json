@@ -41,7 +41,7 @@
     "src/pages/_app.tsx",
     "src/components/StockChart.jsx",
     "src/components/Stonk.jsx"
-  ],
+, "src/components/LightChart.jsx"  ],
   "exclude": [
     "node_modules"
   ]

@@ -64,10 +64,9 @@ const Sidebar = () => {
         <Sider
         className="bg-lightGray dark:bg-darkBlack [&>.ant-layout-sider-trigger]:bg-darkBlack [&>.ant-layout-sider-trigger]:text-white [&>.ant-layout-sider-trigger]:dark:bg-white [&>.ant-layout-sider-trigger]:dark:text-darkBlack" collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
             {
-              theme === 'dark' ?
-            <Image src={darkLogo} alt="assetxpro logos" />
-              :
-            <Image src={logo} alt="assetxpro logos" />
+              theme !== 'dark' ? (<Image src={logo} alt="assetxpro logos" />)
+              :(<Image src={darkLogo} alt="assetxpro logos" />)
+
             }
             <Menu className="bg-lightGray dark:bg-darkBlack dark:text-white font-clashDisplay" defaultSelectedKeys={['1']} mode="inline" items={items} />
         </Sider>
