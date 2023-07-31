@@ -4,12 +4,12 @@ import AssetWatchItem from "./AssetWatchItem";
 const AssetWatch = () => {
 
 const tradingAssets  = [{
-//   label: 'Stocks (stc)',
-//   key: '2132#',
-//   disabled: false,
-//   children: <AssetWatchItem type="stock" />
-// },
-// {
+  label: 'Stocks (stc)',
+  key: '2132#',
+  disabled: false,
+  children: <AssetWatchItem type="stock" />
+},
+{
   label: 'Commodities (cmd)',
   key: '2112#',
   disabled: false,
@@ -21,12 +21,12 @@ const tradingAssets  = [{
   disabled: false,
   children: <AssetWatchItem type="forex" />,
 },
-// {
-//   label: 'Crypto (ct)',
-//   key: '2332#',
-//   disabled: false,
-//   children: <AssetWatchItem type="crypto" />,
-// },
+{
+  label: 'Crypto (ct)',
+  key: '2332#',
+  disabled: false,
+  children: <AssetWatchItem type="crypto" />,
+},
 {
   label: 'Indices (ind)',
   key: '1131#',
@@ -38,7 +38,7 @@ const tradingAssets  = [{
       <Tabs
       defaultActiveKey="1"
       tabPosition="top"
-      className='h-[50vh] [&>.ant-tabs-content-holder]:overflow-scroll bg-lightGray rounded-lg font-clashDisplay'
+      className='h-[50vh] w-[45ch] md:w-full [&>.ant-tabs-content-holder]:overflow-scroll rounded-lg font-clashDisplay bg-lightGray dark:bg-darkBlack dark:text-white'
       items={tradingAssets}
       />
     )

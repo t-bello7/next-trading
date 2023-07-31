@@ -9,7 +9,6 @@ import type { SizeType } from 'antd/es/config-provider/SizeContext';
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const panelStyle = {
-    marginBottom: 12,
     border: 'none'
 };
 
@@ -19,11 +18,10 @@ const AssetWatchItem = ({type} : any) => {
   if (error) return <div> failed to load </div>
   if (!data) return <div> loading </div>
   if (type === 'commodities') {
-    const comData = JSON.parse(data).returnData.filter((item: any) => item.categoryName.toLowerCase() === type).map((item:any) =>  {return {
-      // ...item,
+    const comData =  JSON.parse(data).returnData.filter((item: any) => item.categoryName.toLowerCase() === type).map((item:any) =>  {return {
       id: item.groupName,  
       key: uuidv4(),
-      label: <div className='flex justify-between  '> 
+      label: <div className='flex justify-between border-0'> 
               <span>
                 {item.symbol}
               </span>
@@ -79,7 +77,7 @@ const AssetWatchItem = ({type} : any) => {
         children: 
            <Collapse
           accordion
-          className='[&_.ant-collapse-header]:text-darkBlack'
+          className='[&_.ant-collapse-header]:text-darkBlack [&_.ant-collapse-header]:dark:text-white'
           bordered={false}
           items={comData.filter((item: any) => item.id === 'Agriculture')}
         /> ,
@@ -90,7 +88,7 @@ const AssetWatchItem = ({type} : any) => {
         label: 'Energy',
         children: <Collapse
         accordion
-        className='[&_.ant-collapse-header]:text-darkBlack'
+        className='[&_.ant-collapse-header]:text-darkBlack [&_.ant-collapse-header]:dark:text-white'
         bordered={false}
         items={comData.filter((item: any) => item.id === 'Energy')}
       />,
@@ -101,7 +99,7 @@ const AssetWatchItem = ({type} : any) => {
         label: 'Industrial metals',
         children: <Collapse
         accordion
-        className='[&_.ant-collapse-header]:text-darkBlack'
+        className='[&_.ant-collapse-header]:text-darkBlack [&_.ant-collapse-header]:dark:text-white'
         bordered={false}
         items={comData.filter((item: any) => item.id === 'Industrial Metals')}
       />,
@@ -112,7 +110,7 @@ const AssetWatchItem = ({type} : any) => {
         label: 'Precious Metals',
         children: <Collapse
         accordion
-        className='[&_.ant-collapse-header]:text-darkBlack'
+        className='[&_.ant-collapse-header]:text-darkBlack [&_.ant-collapse-header]:dark:text-white'
         bordered={false}
         items={comData.filter((item: any) => item.id === 'Precious Metals')}
       />,
@@ -123,7 +121,7 @@ const AssetWatchItem = ({type} : any) => {
         label: 'Other',
         children: <Collapse
         accordion
-        className='[&_.ant-collapse-header]:text-darkBlack'
+        className='[&_.ant-collapse-header]:text-darkBlack [&_.ant-collapse-header]:dark:text-white'
         bordered={false}
         items={comData.filter((item: any) => item.id === 'Other')}
       />,
@@ -134,7 +132,7 @@ const AssetWatchItem = ({type} : any) => {
         label: 'LiveStock',
         children:<Collapse
         accordion
-        className='[&_.ant-collapse-header]:text-darkBlack'
+        className='[&_.ant-collapse-header]:text-darkBlack [&_.ant-collapse-header]:dark:text-white'
         bordered={false}
         items={comData.filter((item: any) => item.id === 'LiveStock')}
       />,
@@ -152,7 +150,7 @@ const AssetWatchItem = ({type} : any) => {
         </div>
           <Collapse
           accordion
-          className='[&_.ant-collapse-header]:text-darkBlack'
+          className='[&_.ant-collapse-header]:text-darkBlack [&_.ant-collapse-header]:dark:text-white'
           bordered={false}
           expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
           items={getItems(panelStyle)}
@@ -223,7 +221,7 @@ const AssetWatchItem = ({type} : any) => {
       label: 'Major',
       children: <Collapse
       accordion
-      className='[&_.ant-collapse-header]:text-darkBlack'
+      className='[&_.ant-collapse-header]:text-darkBlack [&_.ant-collapse-header]:dark:text-white'
       bordered={false}
       items={comData.filter((item: any) => item.id === 'Major')}
     />,
@@ -234,7 +232,7 @@ const AssetWatchItem = ({type} : any) => {
       label: 'Minor',
       children:<Collapse
       accordion
-      className='[&_.ant-collapse-header]:text-darkBlack'
+      className='[&_.ant-collapse-header]:text-darkBlack [&_.ant-collapse-header]:dark:text-white'
       bordered={false}
       items={comData.filter((item: any) => item.id === 'Minor')}
     />,
@@ -245,7 +243,7 @@ const AssetWatchItem = ({type} : any) => {
       label: 'Emerging',
       children: <Collapse
       accordion
-      className='[&_.ant-collapse-header]:text-darkBlack'
+      className='[&_.ant-collapse-header]:text-darkBlack [&_.ant-collapse-header]:dark:text-white'
       bordered={false}
       items={comData.filter((item: any) => item.id === 'Emergings')}
     />,
@@ -263,7 +261,7 @@ const AssetWatchItem = ({type} : any) => {
         </div>
           <Collapse
           accordion
-          className='[&_.ant-collapse-header]:text-darkBlack'
+          className='[&_.ant-collapse-header]:text-darkBlack [&_.ant-collapse-header]:dark:text-white'
           bordered={false}
           expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
           items={getItems(panelStyle)}
@@ -335,7 +333,7 @@ const AssetWatchItem = ({type} : any) => {
       label: 'Americas',
       children:<Collapse
       accordion
-      className='[&_.ant-collapse-header]:text-darkBlack'
+      className='[&_.ant-collapse-header]:text-darkBlack [&_.ant-collapse-header]:dark:text-white'
       bordered={false}
       items={comData.filter((item: any) => item.id === 'Americas')}
     />,
@@ -346,7 +344,7 @@ const AssetWatchItem = ({type} : any) => {
       label: 'Asia-Pacific',
       children: <Collapse
       accordion
-      className='[&_.ant-collapse-header]:text-darkBlack'
+      className='[&_.ant-collapse-header]:text-darkBlack [&_.ant-collapse-header]:dark:text-white'
       bordered={false}
       items={comData.filter((item: any) => item.id === 'Asia-Pacific')}
     />,
@@ -357,7 +355,7 @@ const AssetWatchItem = ({type} : any) => {
       label: 'Europe',
       children: <Collapse
       accordion
-      className='[&_.ant-collapse-header]:text-darkBlack'
+      className='[&_.ant-collapse-header]:text-darkBlack [&_.ant-collapse-header]:dark:text-white'
       bordered={false}
       items={comData.filter((item: any) => item.id === 'Europe')}
     />,
@@ -375,7 +373,7 @@ const AssetWatchItem = ({type} : any) => {
         </div>
           <Collapse
           accordion
-          className='[&_.ant-collapse-header]:text-darkBlack'
+          className='[&_.ant-collapse-header]:text-darkBlack [&_.ant-collapse-header]:dark:text-white'
           bordered={false}
           expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
           items={getItems(panelStyle)}

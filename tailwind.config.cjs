@@ -13,9 +13,10 @@ module.exports = {
       'colorPrimary': '#08d74f',
       'secondaryColor': '#FF3434',
       'lightGray': '#E8E8E8',
-      'darkBlack': '#181614',
+      'darkBlack': '#141414',
       'lightBlack': '#212121',
-      'white': '#FFFFFF'
+      'white': '#FFFFFF',
+      'black': '#000000'
     },
     fontFamily: {
       clashDisplay: ["clash-display"],
