@@ -11,6 +11,11 @@ const LightChart = (props) => {
 			lineColor = '#2962FF',
 			textColor = theme !== 'dark' ? 'black' : 'white',
 			areaTopColor = '#2962FF',
+            upColor = '#26a69a',
+            downColor = '#ef5350',
+            borderVisible = false,
+            wickUpColor = '#26a69a',
+            wickDownColor = '#ef5350',
             padding='20px',
 			areaBottomColor = 'rgba(41, 98, 255, 0.28)',
 		} = {},
@@ -28,9 +33,10 @@ const LightChart = (props) => {
         });
         chart.timeScale().fitContent();
 
-        const newSeries = chart.addAreaSeries({ lineColor, topColor: areaTopColor, bottomColor: areaBottomColor });
-        newSeries.setData(data);
-
+        // const newSeries = chart.addAreaSeries({ lineColor, topColor: areaTopColor, bottomColor: areaBottomColor });
+        const candlestickSeries = chart.addCandlestickSeries({upColor, downColor, borderVisible, wickUpColor, wickDownColor});
+        // newSeries.setData(data);
+        candlestickSeries.setData(data);
         return () => {
             chart.remove();
         };
