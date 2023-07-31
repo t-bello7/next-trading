@@ -1,5 +1,4 @@
 import React, { useState, useEffect} from "react";
-import {fitWidth} from "react-financial-charts/lib/index"
 import { format } from "d3-format";
 import { timeFormat } from "d3-time-format";
 import {
@@ -31,20 +30,19 @@ import useWindowSize from "@/utils/hooks/dimesions";
 
 const Stonk = (props) => {
   console.log(props)
-  const [width, setwidth] = useState(0)
-
-  let { width: windowWidth, height} = useWindowSize();
-  height = height-400;
   
-  useEffect(() => {
-      if (windowWidth > 900){
-        setwidth( windowWidth * 0.6);
-      }
-      else{
-      setwidth(windowWidth-200);
-      }
-  }, [windowWidth])
+  const [dimesions, setDimensions] = useState({
+    width: 100,
+    setWidth: 100
+  })
 
+  useEffect(() => {
+    setDimensions({
+      width: props.width,
+      height: props.height
+    }
+    )
+  })
   const initialData = [
     {
       date: "2021-02-02 16:00:00",
@@ -120,7 +118,7 @@ const Stonk = (props) => {
   const min = xAccessor(data[Math.max(0, data.length - 100)]);
   const xExtents = [min, max + 5];
 
-  const gridHeight = height - margin.top - margin.bottom;
+  const gridHeight = dimesions.height - margin.top - margin.bottom;
 
   const elderRayHeight = 100;
   const elderRayOrigin = (_, h) => [0, h - elderRayHeight];
@@ -159,13 +157,12 @@ const Stonk = (props) => {
     return data.close > data.open ? "#26a69a" : "#ef5350";
   };
 
-  console.log(withSize)
 
   return (
         <ChartCanvas
-        height={height}
+        height={dimesions.height}
         ratio={3}
-        width={width}
+        width={dimesions.width}
         margin={margin}
         data={data}
         type="svg"

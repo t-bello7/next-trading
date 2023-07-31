@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { SizeMe } from 'react-sizeme';
 import { useTheme } from 'next-themes';
+import useDimensions from 'react-use-dimensions'
 import { 
   Button,
   Layout,
@@ -57,7 +57,7 @@ const  Home = () => {
 
       }
   }, [windowWidth])
-
+  const [ref, { width: dimWid, height }] = useDimensions()
   if (user) {
     return (
       <main>
@@ -87,18 +87,10 @@ const  Home = () => {
             </Row>
             <Row className='flex-col gap-2'>
             <div className='grid md:grid-cols-3 gap-4 w-full h-[50vh]'>
-              <SizeMe   monitorHeight
-  refreshRate={32}>
-              {
-                // 
-               ({size}) => 
-               <Col className='md:col-span-2 bg-lightGray dark:bg-darkBlack dark:text-white rounded'>
-                {JSON.stringify(size)}px
-               <Stonk/> 
+    
+               <Col ref={ref} className='md:col-span-2 bg-lightGray dark:bg-darkBlack dark:text-white rounded'>
+               <Stonk width={dimWid} height={height}/> 
                </Col>
-              }
-
-              </SizeMe>
               <Col className=' md:col-span-1'>
                 <AssetWatch />
               </Col>
