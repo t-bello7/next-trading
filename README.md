@@ -39,7 +39,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - https://www.xtb.com/ro
 - https://betterprogramming.pub/write-optimised-dockerfiles-for-next-js-d644b628c570
 - https://github.com/vercel/next.js/discussions/16995
-- https://www.behance.net/gallery/173665829/Exchange-Trading-Platform?tracking_source=search_projects|Trading+platform
+- https://www.behance.net/gallery/173665829/Exchange-Trading-Platform
 - https://ant.design/
 - https://codesandbox.io/examples/package/react-stockcharts
 - https://www.npmjs.com/package/react-stockcharts
