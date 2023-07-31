@@ -7,7 +7,7 @@ const TextData  = ({name}: any) => (
 )
 const ProfitData = () => {
     return (  
-    <div className='h-[10vh] bg-lightGray dark:bg-darkBlack rounded'>
+    <div className='hidden md:block h-[10vh] bg-lightGray dark:bg-darkBlack rounded'>
         <Row gutter={16}>
             <Col span={3}>
             <Statistic className="[&_.ant-statistic-content-value]:text-sm [&_.ant-statistic-content-value]:dark:text-white [&_.ant-statistic-content-value]:text-black" title ={<TextData name="Balance" />} value={138} suffix={<TextData name="USD" />} />
