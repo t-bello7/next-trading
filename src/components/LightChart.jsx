@@ -33,9 +33,7 @@ const LightChart = (props) => {
         });
         chart.timeScale().fitContent();
 
-        // const newSeries = chart.addAreaSeries({ lineColor, topColor: areaTopColor, bottomColor: areaBottomColor });
         const candlestickSeries = chart.addCandlestickSeries({upColor, downColor, borderVisible, wickUpColor, wickDownColor});
-        // newSeries.setData(data);
         candlestickSeries.setData(data);
         return () => {
             chart.remove();
