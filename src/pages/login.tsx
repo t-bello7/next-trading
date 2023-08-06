@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 
 const Login  = () => {
+    const { status } = useSession()
     const router = useRouter()
     const [user, setUser] = useState<{userName: string} | null>(null);
     const [err, setErr] = useState<string>();
@@ -34,15 +36,11 @@ const Login  = () => {
     }
 
     useEffect(() => {
-        if (typeof window !== 'undefined' && window.localStorage){
-            let user = localStorage.getItem('user');
-            if(user) {
-                setUser(JSON.parse(user))
-                router.push('/')
-            }
-    }
+        if(status === 'authenticated') {
+            router.push('/')
+        }
     }, [router])
-    if (user) {
+    if (status === 'authenticated') {
         return;
     }
     return (
@@ -62,6 +60,10 @@ const Login  = () => {
                         </span>
                     </button> 
                 </form>
+                <button onClick={(e) => {
+                    e.preventDefault()
+                    signIn('google')}}>sign in with gooogle</button>
+                {(status === 'loading') && <h1> loading... please wait</h1>}
                 <p> Don&apos;t have an account ? <Link href="/register">   Sign Up </Link> </p>
             </main>)
 }
