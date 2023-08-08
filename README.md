@@ -49,7 +49,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - https://robertmarshall.dev/blog/how-to-mock-local-storage-in-jest-tests/
 - https://www.svgrepo.com/
 - https://github.com/tradingview/lightweight-charts
-
+- https://www.tradingview.com/widget/advanced-chart/
+- http://rrag.github.io/react-stockcharts/documentation.html?#/interactive_y_coordinate
+- https://www.youtube.com/watch?v=yCJH72nZ8DI
+- https://github.com/nextauthjs/next-auth-typescript-example/tree/main
 ## Assets Needed
 - stocks (stc)
 - commodities (cmd)

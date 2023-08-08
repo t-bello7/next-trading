@@ -22,10 +22,10 @@ const items: TabsProps['items'] = [
 const MarketWatch = () => {
     return (
     <div className='h-[15vh] bg-lightGray dark:bg-darkBlack rounded'>
-         <Tabs 
-              type="card"
-              className='dark:text-white'
-         defaultActiveKey="1" items={items} onChange={onChange} />
+      <Tabs 
+        type="card"
+        className='dark:text-white'
+        defaultActiveKey="1" items={items} onChange={onChange} />
     </div>
     )
 }
