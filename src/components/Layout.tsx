@@ -8,13 +8,13 @@ const DashBoardLayout = ({children}: any) => {
   const { status } = useSession();
   const router = useRouter()
   console.log(status);
-  // useEffect(() => {
-  //   if (status === 'unauthenticated') {
-  //     router.push('/login')
-  //   }
-  // }, [router])
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/login')
+    }
+  }, [router])
 
-  // if (status === 'authenticated') {
+  if (status === 'authenticated') {
     return(
     <Layout className='bg-lightGray dark:bg-darkBlack min-h-screen overflow-auto'>
         <Sidebar />
@@ -23,8 +23,8 @@ const DashBoardLayout = ({children}: any) => {
         </Layout>
     </Layout>
     )
-  // }
-  // return;
+  }
+  return;
 }
 
 export default DashBoardLayout;

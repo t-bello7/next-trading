@@ -21,18 +21,7 @@ const Login  = () => {
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (typeof window !== 'undefined' && window.localStorage){
-            const userDatastr = localStorage.getItem('userData');
-            if (userDatastr) {
-                const savedUserData = JSON.parse(userDatastr);
-                if (savedUserData['username'] === userData['username'] && savedUserData['password'] === userData['password']){
-                    localStorage.setItem('user', JSON.stringify({username: userData['username']}))
-                    router.push('/')
-                } else {
-                    setErr('Invalid Login')
-                }
-            }
-        }
+        
     }
 
     useEffect(() => {
