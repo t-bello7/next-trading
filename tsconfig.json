@@ -44,7 +44,7 @@
   "src/pages/_app.tsx",
   "src/components/StockChart.jsx",
   "src/components/Stonk.jsx",
-  "src/components/LightChart.jsx", "__tests__/index.test.tsssdsx", "__tests__/index.snapshot.tsxqede" ],
+  "src/components/LightChart.jsx", "__tests__/index.test.tsssdsx", "__tests__/index.snapshot.tsxqede", "src/pages/admin.jsx" ],
   "exclude": [
     "node_modules"
   ]

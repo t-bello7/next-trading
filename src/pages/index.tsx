@@ -88,7 +88,7 @@ const  Home: NextPageWithLayout = () => {
                   Deposit
                 </Button>
               </Col>
-            </Row>
+        </Row>
             <Row className='flex-col gap-2'>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-4 w-full'>
               <Col ref={ref} className='h-[40vh] md:h-[50vh] md:col-span-2 bg-lightGray dark:bg-darkBlack dark:text-white rounded'>

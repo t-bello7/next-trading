@@ -51,6 +51,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - http://rrag.github.io/react-stockcharts/documentation.html?#/interactive_y_coordinate
 - https://www.youtube.com/watch?v=yCJH72nZ8DI
 - https://github.com/nextauthjs/next-auth-typescript-example/tree/main
+- https://xerosource.com/real-time-data-with-nextjs-websockets/
+- https://blog.logrocket.com/implementing-websocket-communication-next-js/
 ## Assets Needed
 - stocks (stc)
 - commodities (cmd)
