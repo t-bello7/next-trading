@@ -38,7 +38,7 @@ const tradingAssets  = [{
       <Tabs
       defaultActiveKey="1"
       tabPosition="top"
-      className='h-[20vh] md:h-[50vh] w-[45ch] md:w-full [&>.ant-tabs-content-holder]:overflow-scroll rounded-lg font-clashDisplay bg-lightGray dark:bg-darkBlack dark:text-white'
+      className='h-[20vh] md:h-[50vh] w-[100%] md:w-full [&_.ant-tabs-nav]:mb-0 [&>.ant-tabs-content-holder]:overflow-scroll rounded-lg font-clashDisplay bg-lightGray dark:bg-darkBlack dark:text-white'
       items={tradingAssets}
       />
     )
