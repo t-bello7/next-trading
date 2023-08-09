@@ -10,9 +10,9 @@ const DashBoardLayout = ({children}: any) => {
   console.log(status);
   useEffect(() => {
     if (status === 'unauthenticated') {
-      router.push('/login')
+      router.push('/api/auth/signin')
     }
-  }, [router])
+  }, [router, status])
 
   if (status === 'authenticated') {
     return(

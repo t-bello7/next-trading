@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import React, { useState } from 'react';
+import React, { useState, createContext, useContext } from 'react';
 import useDimensions from 'react-use-dimensions'
 import { useTheme } from 'next-themes';
 import { useSession } from 'next-auth/react';
@@ -53,6 +53,9 @@ const initialDasta = [
   { time: '2018-12-31', open: 109.87, high: 114.69, low: 85.66, close: 111.26 },
 ];
 
+const WebSocketContext = createContext("");
+
+
 const  Home: NextPageWithLayout = () => {
   const { data, error } = useSWR('/api/candleData', fetcher);
   const { systemTheme, theme, setTheme } = useTheme();
@@ -67,41 +70,41 @@ const  Home: NextPageWithLayout = () => {
   // console.log(initialData.slice(0, 5))
   // if (status === 'authenticated') {
     return (
-    <main>
-    <Row justify="space-between" className='mb-8'>
-              <Col className='font-clashDisplay '>
-              <span>Welcome </span> <br />
-              {/* <code className='font-bold'>{userData.user.address}</code> */}
-              </Col>
-              <Col className='flex gap-2 items-center'>
-                <Switch
-                  className='bg-lightGray rotate-90'
-                  unCheckedChildren={<BrightButtonIcon />}
-                  checkedChildren={<DarkMoonIcon />}
-                  onClick={handleThemeChange}
-                  defaultChecked
-                />
-                <span className='font-clashDisplay'>
-                  $ 140.00
-                </span>
-                <Button type="primary" shape="round" className='shadow-md font-clashDisplay bg-darkBlack' icon={<DownloadOutlined />} size={size}>
-                  Deposit
-                </Button>
-              </Col>
-        </Row>
-            <Row className='flex-col gap-2'>
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-4 w-full'>
-              <Col ref={ref} className='h-[40vh] md:h-[50vh] md:col-span-2 bg-lightGray dark:bg-darkBlack dark:text-white rounded'>
-              <LightChart width={width} height={height} data={initialData}> </LightChart>
-              </Col>
-              <Col className='h-[20vh] md:h-[50vh] md:col-span-1'>
-                <AssetWatch />
-              </Col>
-            </div>
-            <MarketWatch />
-            <ProfitData />
-            </Row>
-            </main>
+    <WebSocketContext.Provider value="dark">
+      <Row justify="space-between" className='mb-8'>
+        <Col className='font-clashDisplay '>
+        <span>Welcome </span> <br />
+        {/* <code className='font-bold'>{userData.user.address}</code> */}
+        </Col>
+        <Col className='flex gap-2 items-center'>
+          <Switch
+            className='bg-lightGray rotate-90'
+            unCheckedChildren={<BrightButtonIcon />}
+            checkedChildren={<DarkMoonIcon />}
+            onClick={handleThemeChange}
+            defaultChecked
+          />
+          <span className='font-clashDisplay'>
+            $ 140.00
+          </span>
+          <Button type="primary" shape="round" className='shadow-md font-clashDisplay bg-darkBlack' icon={<DownloadOutlined />} size={size}>
+            Deposit
+          </Button>
+        </Col>
+      </Row>
+      <Row className='flex-col gap-2'>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-4 w-full'>
+        <Col ref={ref} className='h-[40vh] md:h-[50vh] md:col-span-2 bg-lightGray dark:bg-darkBlack dark:text-white rounded'>
+        <LightChart width={width} height={height} data={initialData}> </LightChart>
+        </Col>
+        <Col className='h-[20vh] md:h-[50vh] md:col-span-1'>
+          <AssetWatch />
+        </Col>
+      </div>
+      <MarketWatch />
+      <ProfitData />
+      </Row>
+      </WebSocketContext.Provider>
     )
  }
 

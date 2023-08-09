@@ -19,7 +19,7 @@ const AdminPage = () => {
         {data.map((item, index) => (
            <div key={index}>{item}</div>
          ))}
-                  <WebSocketClient onDataReceived={handleDataReceived} />
+        <WebSocketClient onDataReceived={handleDataReceived} />
         Admin only page 
         <button onClick={() => signOut()}>Sign Out</button>
     
