@@ -43,9 +43,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - https://ant.design/
 - https://codesandbox.io/examples/package/react-stockcharts
 - https://www.npmjs.com/package/react-stockcharts
-- https://medium.com/how-to-react/create-a-stock-chart-in-react-js-677be5f2f356 
-- react-highcharts
-- http://rrag.github.io/react-stockcharts/documentation.html#/candlestick_chart
+- https://medium.com/how-to-react/create-a-stock-chart-in-react-js-677be5f2f356 - http://rrag.github.io/react-stockcharts/documentation.html#/candlestick_chart
 - https://robertmarshall.dev/blog/how-to-mock-local-storage-in-jest-tests/
 - https://www.svgrepo.com/
 - https://github.com/tradingview/lightweight-charts
