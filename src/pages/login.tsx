@@ -28,7 +28,7 @@ const Login  = () => {
         if(status === 'authenticated') {
             router.push('/')
         }
-    }, [router])
+    }, [router, status])
     if (status === 'authenticated') {
         return;
     }

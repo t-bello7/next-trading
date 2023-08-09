@@ -1,4 +1,4 @@
-import { storeType } from "../utils/type";
+import { storeType } from "../src/utils/hooks/type";
 
 const localStorageMock =  ( function() {
     let store: storeType = {};

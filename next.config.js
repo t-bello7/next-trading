@@ -13,6 +13,9 @@ const withPWA = nextPWA({
 export default withPWA({
   reactStrictMode: true,
   transpilePackages: ['@react-financial-charts', 'react-financial-charts'],
+  experimental: {
+    serverComponentsExternalPackages: ['@prisma/client', 'bcrypt']
+  }
 })
 
  
