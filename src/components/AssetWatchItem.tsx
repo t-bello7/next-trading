@@ -143,7 +143,6 @@ const panelStyle = {
 };
 
 const AssetWatchItem = ({ type }: any) => {
-  const [size, setSize] = useState<SizeType>('large');
   const { data, error } = useSWR('/api/staticData', fetcher);
   if (error) return <div> failed to load </div>
   if (!data) return <div> loading </div>
@@ -448,7 +447,6 @@ const AssetWatchItem = ({ type }: any) => {
         style: panelStyle,
       },
     ];
-
     return (<DataRender items={getItems(panelStyle)} />)
   }
   if (type === 'crypto') {

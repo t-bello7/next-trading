@@ -68,13 +68,12 @@ const  Home: NextPageWithLayout = () => {
   if (!data) return  <h1>loading</h1>
   const initialData = JSON.parse(data).returnData.rateInfos.map((item:any) => ({...item, time:  moment(item.ctmString).utc().valueOf()})).slice(0, 10);
   // console.log(initialData.slice(0, 5))
-  // if (status === 'authenticated') {
     return (
     <WebSocketContext.Provider value="dark">
       <Row justify="space-between" className='mb-8'>
         <Col className='font-clashDisplay '>
         <span>Welcome </span> <br />
-        {/* <code className='font-bold'>{userData.user.address}</code> */}
+        <code className='font-bold'>{userData?.user.name}</code>
         </Col>
         <Col className='flex gap-2 items-center'>
           <Switch
@@ -93,16 +92,16 @@ const  Home: NextPageWithLayout = () => {
         </Col>
       </Row>
       <Row className='flex-col gap-2'>
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-4 w-full'>
-        <Col ref={ref} className='h-[40vh] md:h-[50vh] md:col-span-2 bg-lightGray dark:bg-darkBlack dark:text-white rounded'>
-        <LightChart width={width} height={height} data={initialData}> </LightChart>
-        </Col>
-        <Col className='h-[20vh] md:h-[50vh] md:col-span-1'>
-          <AssetWatch />
-        </Col>
-      </div>
-      <MarketWatch />
-      <ProfitData />
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-4 w-full'>
+          <Col ref={ref} className='h-[40vh] md:h-[50vh] md:col-span-2 bg-lightGray dark:bg-darkBlack dark:text-white rounded'>
+          <LightChart width={width} height={height} data={initialData}> </LightChart>
+          </Col>
+          <Col className='h-[20vh] md:h-[50vh] md:col-span-1'>
+            <AssetWatch />
+          </Col>
+        </div>
+        <MarketWatch />
+        <ProfitData />
       </Row>
       </WebSocketContext.Provider>
     )

@@ -86,8 +86,6 @@ const WebSocketClient = ({ onDataReceived }) => {
     }
   }
   const getTradeRecords = (orders) => {
-    // Returns array of trades listed in orders argument.
-    // pass the order number in 
     let msg = {};
     msg.command = "getTradeRecords";
     msg.arguments = {
