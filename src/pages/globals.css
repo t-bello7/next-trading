@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @font-face {
     font-family: "Clash-Display";
     src: url("../assets/fonts/clashDisplay/ClashDisplay-Regular.otf");

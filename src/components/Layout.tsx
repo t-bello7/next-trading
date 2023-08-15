@@ -7,7 +7,6 @@ import { Layout } from "antd";
 const DashBoardLayout = ({children}: any) => {
   const { status } = useSession();
   const router = useRouter()
-  console.log(status);
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/api/auth/signin')

@@ -7,15 +7,12 @@ const Profile = () => {
     )
 }
 
-
-
 Profile.getLayout = function getLayout(page: ReactElement) {
     return (
       <DashBoardLayout>
         {page}
       </DashBoardLayout>
     )
-  }
+}
   
-
 export default Profile;

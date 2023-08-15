@@ -46,3 +46,7 @@ export interface OpenPositionFixedDataType {
     operation: React.ReactElement;
 }
 
+
+export interface AssetContextType {
+    currentAsset: string | null;
+}

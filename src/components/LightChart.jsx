@@ -16,7 +16,6 @@ const LightChart = (props) => {
             borderVisible = false,
             wickUpColor = '#26a69a',
             wickDownColor = '#ef5350',
-            padding='20px',
 			areaBottomColor = 'rgba(41, 98, 255, 0.28)',
 		} = {},
 	} = props;

@@ -3,7 +3,6 @@ import React, { useState, createContext, useContext } from 'react';
 import useDimensions from 'react-use-dimensions'
 import { useTheme } from 'next-themes';
 import { useSession } from 'next-auth/react';
-import moment from 'moment';
 import { 
   Button,
   Row,
@@ -13,6 +12,7 @@ import {
 import Icon, {
   DownloadOutlined,
 } from '@ant-design/icons';
+import moment from 'moment';
 import LightChart from '@/components/LightChart';
 import MarketWatch from '@/components/MarketWatch';
 import ProfitData from '@/components/ProfitData';
@@ -22,6 +22,8 @@ import type { SizeType } from 'antd/es/config-provider/SizeContext';
 import type { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon';
 import type { NextPageWithLayout } from './_app';
 import type { ReactElement } from 'react'
+import { AssetContextType } from '@/utils/type';
+import { useWebSocket } from '@/utils/hooks/useWebSocket';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const lightSvg = () => (
@@ -53,23 +55,33 @@ const initialDasta = [
   { time: '2018-12-31', open: 109.87, high: 114.69, low: 85.66, close: 111.26 },
 ];
 
-const WebSocketContext = createContext("");
+const WebSocketContext = createContext<AssetContextType | null>(null);
 
+// '{ currentAsset: null; setCurrentAsset: React.Dispatch<React.SetStateAction<null>>; }'
 
 const  Home: NextPageWithLayout = () => {
+  const [currentAsset, setCurrentAsset] = useState<AssetContextType>({
+    currentAsset: 'sd'
+  });
+  // const [ isLoading, returnData ] = useWebSocket('getCandles') 
+  // console.log(isLoading)
+  // console.log(`candles ${returnData}`)
   const { data, error } = useSWR('/api/candleData', fetcher);
   const { systemTheme, theme, setTheme } = useTheme();
-  const currentThme = theme === 'system' ? systemTheme : theme;
+  // const currentTheme = theme === 'system' ? systemTheme : theme;
   const handleThemeChange = () => theme === "dark" ? setTheme("light") : setTheme("dark"); 
   const [size, setSize] = useState<SizeType>('large');
-  const { data: userData, status } = useSession();
+  const { data: userData} = useSession();
   const [ref, { width, height }] = useDimensions()
-  if (error) return <h1>failed to load </h1>
-  if (!data) return  <h1>loading</h1>
+  if (!userData) return  <h1>loading</h1>
+  if (error) return <div> failed to load </div>
+  if (!data) return <div> loading </div>
   const initialData = JSON.parse(data).returnData.rateInfos.map((item:any) => ({...item, time:  moment(item.ctmString).utc().valueOf()})).slice(0, 10);
-  // console.log(initialData.slice(0, 5))
+
     return (
-    <WebSocketContext.Provider value="dark">
+    <WebSocketContext.Provider
+    value={currentAsset }
+    >
       <Row justify="space-between" className='mb-8'>
         <Col className='font-clashDisplay '>
         <span>Welcome </span> <br />

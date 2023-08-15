@@ -30,78 +30,20 @@ const WebSocketClient = ({ onDataReceived }) => {
       let msg = {}
       msg.command = "logout"
   }
-  const streamBalance = () => {
-    let msg = {};
-    msg.command = "getBalance";
-    msg.streamSessionId = "from login response";
-    console.log('Streaming Balance Data');
-    send(msg)
-  }
-
-  const streamCandles = () => {
-    let msg = {}
-    msg.command = "getCandles";
-    msg.streamSessionId = "from login response";
-    console.log('Streaming Candle Data')
-    send(msg)
-  }
-
-  const streamProfits = () => {
-    let msg = {}
-    msg.command = "getProfits"
-    msg.streamSessionId = "from login response";
-    console.log('Streaming Profits Data')
-    send(msg);
-  }
-  const streamTrades = () => {
-    let msg = {};
-    msg.command = "getTrades"
-    msg.streamSessionId = "from login response";
-    console.log('Streaming User Trades Data');
-    send(msg);
-  }
   const getAllSymbols = () => {
     let msg = {};
     msg.command = "getAllSymbols";
     console.log('Getting list of symbols');
     send(msg)
   }
-  const getCalendar = () => {
-    let msg = {}
-    msg.command = "getCalendar"
-    console.log("Get calander list")
-    send(msg)
-  }
-  const getCandles = () => {
-    let msg = {};
-    msg.command = "getCandles";
-    console.log('Getting interval of candles every 1 minute');
-    send(msg)
-  }
-  const getTrades = () => {
-    let msg = {};
-    msg.command = "getTrades";
-    msg.arguments = {
-        "openedOnly": true
-    }
-  }
-  const getTradeRecords = (orders) => {
-    let msg = {};
-    msg.command = "getTradeRecords";
-    msg.arguments = {
-        "orders": [...orders]
-    };
-    console.log("Get all trades with the order number");
-    send(msg);
-  }  
   const parseGetAllSymbols = (returnData) => {
-    console.log(returnData.map(item => ({
+    returnData.map(item => ({
             symbol: item.symbol,
             ask: item.ask,
             bid: item.bid,
             descr: item.description
         }
-    )))
+    ))
   }
 
   const connect = () => {
@@ -117,7 +59,7 @@ const WebSocketClient = ({ onDataReceived }) => {
           if (response.streamSessionId != undefined) {
               getAllSymbols();
           } else {
-              parseGetAllSymbols(response)
+              console.log(parseGetAllSymbols(response.returnData));
           }
       } else {
           console.log('Error: ' + response.errorDescr)

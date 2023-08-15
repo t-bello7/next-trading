@@ -18,12 +18,10 @@ const Login  = () => {
             password: e.target.name === 'password' ? e.target.value : userData['password']
         })
     };
-
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
     }
-
     useEffect(() => {
         if(status === 'authenticated') {
             router.push('/')
