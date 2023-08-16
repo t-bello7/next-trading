@@ -48,5 +48,5 @@ export interface OpenPositionFixedDataType {
 
 
 export interface AssetContextType {
-    currentAsset: string | null;
+    currentSymbol: string | null;
 }

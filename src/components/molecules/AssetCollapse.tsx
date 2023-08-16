@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext, useReducer } from "react";
 import { Collapse, Button, Badge, Modal, Popover } from 'antd';
 import {
     CaretRightOutlined,
@@ -6,8 +6,8 @@ import {
     PlusCircleOutlined,
     LineChartOutlined
   } from '@ant-design/icons';
-  import type { SizeType } from 'antd/es/config-provider/SizeContext';
 import TradeInput from '../atoms/TradeInput';
+import { useWebSocketContext } from "../../hooks/state";
 
 const DataLabel = (props: any) => {
     const { item } = props
@@ -32,11 +32,16 @@ const DataLabel = (props: any) => {
 const DataChild = (props: any) => {
   const [infoModalOpen, setInfoModalOpen] = useState(false);
   const [sltpPopoverOpen, setsltpPopoverOpen] = useState(false);
-  const [tradeModalOpen, setTradeModalOpen] = useState(false)
+  const [tradeModalOpen, setTradeModalOpen] = useState(false);
+  const { changeSymbol } = useWebSocketContext();
   const handleOpenChange = (newOpen: boolean) => {
     setsltpPopoverOpen(newOpen);
   };
   const { item } = props
+  const handleSymbolChange = () => {
+    changeSymbol(item.symbol)
+  }
+
   return (
     <div className='bg-lightGray p-4'>
       <div className='flex justify-between mb-3'>
@@ -77,7 +82,7 @@ const DataChild = (props: any) => {
             <p>some contents...</p>
             <p>some contents...</p>
           </Modal>
-          <LineChartOutlined />
+          <LineChartOutlined className="hover:cursor-pointer" onClick={handleSymbolChange}/>
         </span>
       </div>
       <div className='mb-3 flex flex-col gap-2 justify-between lg:flex-row'>

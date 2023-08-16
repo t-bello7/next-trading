@@ -5,28 +5,23 @@ import { Collapse } from 'antd';
 import type { CSSProperties } from 'react';
 import type { CollapseProps } from 'antd';
 import { DataLabel, DataChild, DataRender } from './molecules/AssetCollapse';
-import { fetcher } from '@/utils/fetch';
-import { useWebSocket } from '@/utils/hooks/useWebSocket';
+import { useWebSocket } from '@/hooks/useWebSocket';
 
 const panelStyle = {
   border: 'none'
 };
 
 const AssetWatchItem = ({ type }: any) => {
-  // const { data, error } = useSWR('/api/staticData', fetcher);
   const [ returnData ] = useWebSocket('getAllSybmols') 
-  // if (error) return <div> failed to load </div>
   if (!returnData ) return <div> loading </div>
-  console.log(returnData)
-
   if (type === 'commodities') {
-    const comData = returnData.filter((item: any) => item.categoryName.toLowerCase() === "cmd").map((item: any) => ({
-      id: item.groupName,
-      key: uuidv4(),
-      label: <DataLabel item={item} />,
-      children: <DataChild item={item} />,
-      showArrow: false,
-    }))
+      const comData = returnData.filter((item: any) => item.categoryName.toLowerCase() === "cmd").map((item: any) => ({
+        id: item.groupName,
+        key: uuidv4(),
+        label: <DataLabel item={item} />,
+        children: <DataChild item={item} />,
+        showArrow: false,
+      }))
     const getItems: (panelStyle: CSSProperties) => CollapseProps['items'] = (panelStyle) => [
       {
         key: '1',
