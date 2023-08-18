@@ -4,9 +4,10 @@ import { createChart, ColorType } from 'lightweight-charts';
 import { useWebSocket } from '@/hooks/useWebSocket';
 import { useWebSocketContext } from '@/hooks/state';
 import moment from 'moment';
+// import { useSocketStream } from '@/hooks/useSocketStream';
 
 const LightChart = (props: any) => {
-    const chartRef = useRef()
+    const chartRef = useRef< HTMLDivElement >(null)
     const { symbol } = useWebSocketContext();
     const { theme } = useTheme()
     const args =  {
@@ -16,10 +17,14 @@ const LightChart = (props: any) => {
             "symbol": symbol
         }
     }
-    const [ returnData ] = useWebSocket('getCandles', args)
-
-    console.log(symbol)
-    console.log(returnData)
+    // const args = {
+    //     symbol: symbol
+    // }
+    // const { data } = useSocketStream('streamCandles', args)
+    // if (data) {
+    //     console.log(data)
+    // }
+    const { returnData } = useWebSocket('getCandles', args)
     // const initialData = [
     //     { time: '2018-12-22', open: 75.16, high: 82.84, low: 36.16, close: 45.72 },
     //     { time: '2018-12-23', open: 45.12, high: 53.90, low: 45.12, close: 48.09 },
@@ -50,7 +55,15 @@ const LightChart = (props: any) => {
 	} = props;
     useEffect(() => {
     
-        const chart = createChart(chartRef.current, {
+        const chart = createChart(chartRef.current!, {
+            timeScale: {
+                timeVisible: true
+            },
+            localization: {
+                timeFormatter: (timestamp: any) => {
+                 return new Date(timestamp * 1000).toLocaleString('en-GB');
+                }
+            },
             layout: {
                 background: { type: ColorType.Solid, color: backgroundColor },
                 textColor,
@@ -61,16 +74,25 @@ const LightChart = (props: any) => {
         chart.timeScale().fitContent();
         const candlestickSeries = chart.addCandlestickSeries({upColor, downColor, borderVisible, wickUpColor, wickDownColor});
         if (returnData){
-            const initialData = returnData.rateInfos.map((item:any) => ({...item, time:  moment(item.ctmString).utc().valueOf()})).slice(0, 10);
-            console.log(initialData)
+            // const initialData = returnData.rateInfos.map((item:any) => ({...item, time:  moment(item.ctmString).utc().valueOf()})).slice(0, 10);
+            // const initialData = returnData.rateInfos.map((item:any) => ({...item, time: item.ctm}));
+            const initialData = returnData.rateInfos.map((item:any) => ({
+                // ctm: item.ctm,
+                // time:  moment(item.ctm).format("YYYY-MM-DD"),
+                time: item.ctm,
+                ctmst: moment(item.ctmString).unix(),
+                open: item.open * 0.0001,
+                close: item.close * 0.0001,
+                low: item.high * 0.0001,
+                high: item.high * 0.0001
+            })).slice(60, 70);
             candlestickSeries.setData(initialData);
         }
         return () => {
             chart.remove();
         };
-    }, [returnData, width, height, backgroundColor, lineColor, textColor, areaTopColor, areaBottomColor]);
+    }, [ returnData, width, height, backgroundColor, lineColor, textColor, areaTopColor, areaBottomColor]);
     if (returnData === undefined) return <div ref={chartRef}> loading </div>
-    // if (!returnData) return <div> loading </div>
 
     return (
         <div ref={chartRef}>

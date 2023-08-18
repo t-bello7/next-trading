@@ -1,8 +1,9 @@
 import { createContext, useContext, useReducer } from "react";
-import { AssetContextType } from "../utils/type";
+// import { AssetContextType } from "../utils/type";
 
 export const initialState = {
-    symbol: 'EURUSD'
+    symbol: 'EURUSD',
+    changeSymbol: (item: string) => {}
 }
 export const reducer = (state: any, action: any) => {
     const { type, payload } = action

@@ -1,47 +1,45 @@
 import { useState, useEffect, useRef } from 'react';
 
-const parseGetAllSymbols = (returnData: any) => (
-    returnData.map((item: any) => ({
-            symbol: item.symbol,
-            ask: item.ask,
-            bid: item.bid,
-            descr: item.description
-        }
-    ))
-  )
+// const parseGetAllSymbols = (returnData: any) => (
+//     returnData.map((item: any) => ({
+//             symbol: item.symbol,
+//             ask: item.ask,
+//             bid: item.bid,
+//             descr: item.description
+//         }
+//     ))
+//   )
+
 const useWebSocket = (command : string, args={}) => {
-    // arguments = 
     const [returnData, setReturnData] = useState<any>()
-    const [isLoading, setIsLoading] = useState(false);
-    const ws = useRef(null);
+    const [streamId, setStreamId] = useState<any>()
+    const ws = useRef<WebSocket | null>(null);
     useEffect(() => {
 
-        ws.current = new WebSocket(`${process.env.NEXT_PUBLIC_XTB_URL}`);
+        ws.current = new WebSocket(`${process.env.NEXT_PUBLIC_XTB_URL}`);  
         const subscribe = (subscribeData: any) => {
             try {
-                ws.current.send(JSON.stringify(subscribeData))
+                ws.current!.send(JSON.stringify(subscribeData))
             } catch (Exception) {
                 console.error(Exception)
             }
         }
         const getAllSymbols = () => {
-            console.log('Getting list of symbols');
-
             subscribe({
                 command: "getAllSymbols"
             })
         }
         const getChartLastRequest = () => {
-            console.log('Getting chart last request');
             subscribe({
-                "command": "getChartLastRequest",
-                "arguments": args
+                command: "getChartLastRequest",
+                arguments: args
             })
         }
-        const streamBalance = (streamId: string) => {
+        const getTrades = () => {
             subscribe({
-                command: "getBalance",
-                streamSessionId: streamId
+                command: "getTrades",
+                arguments: args
+                
             })
         }
         const login = () => {
@@ -53,11 +51,10 @@ const useWebSocket = (command : string, args={}) => {
                 }
             })
         }
-        setIsLoading(true)
         ws.current.onopen = () => {
             login();
         }
-        ws.current.onmessage = (event) => {
+        ws.current.onmessage = (event: any) => {
             try {
                 let response = JSON.parse(event.data);
                 if (response.status == true) {
@@ -66,11 +63,13 @@ const useWebSocket = (command : string, args={}) => {
                             getAllSymbols()                                
                         }
                         if(command === "getCandles") {
-                            // streamCandles(response.streamSessionId)
-                            // streamBalance(response.streamSessionId)
                             getChartLastRequest()
                         }
-                        
+                        if(command === "getTrades") {
+                            getTrades()
+                        } else {
+                            setStreamId(response.streamSessionId)
+                        }
                     }
                     else {
                         if(command === "getAllSybmols"){
@@ -79,6 +78,9 @@ const useWebSocket = (command : string, args={}) => {
                         if(command === "getCandles"){
                             setReturnData(response.returnData)
                         }
+                        if (command ==="getTrades"){
+                            setReturnData(response.returnData)
+                        } 
                     }   
                 } else {
                     console.log('Error: ' + response.errorDescr)
@@ -91,15 +93,17 @@ const useWebSocket = (command : string, args={}) => {
         ws.current.onclose = () => {
             console.log('Connection closed');
         };
-
         ws.current.onerror = () => {
             console.log("WS Error");
-        };
-        return () => {
-            ws.current.close();
-          };
+        };   
+        // return () => {
+        //     ws.current!.close()
+        // };
     },[])
-    return [returnData];
+    return {
+        returnData: returnData,
+        streamId: streamId
+    };
 }
 
 export {
@@ -114,12 +118,6 @@ export {
     //     })
     // }
 
-    // const streamTrades = () => {
-    //     setMsg({
-    //         command: "getTrades",
-    //         streamSessionId: streamId
-    //     })
-    // }
     // const streamTradeStatus = () => {
     //     setMsg({
     //         command: "getTradeStatus",

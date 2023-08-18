@@ -7,8 +7,6 @@ import { SessionProvider } from "next-auth/react"
 import customTheme from '@/utils/themeConfig';
 import type { ReactElement, ReactNode } from 'react'
 import type { NextPage } from 'next'
-import { WebSocketContextProvider } from '@/hooks/state';
-
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
     getLayout?: (page: ReactElement) => ReactNode

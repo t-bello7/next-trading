@@ -1,5 +1,12 @@
-import { useState, useContext, useReducer } from "react";
-import { Collapse, Button, Badge, Modal, Popover } from 'antd';
+import { useState } from "react";
+import { Collapse,
+        Switch,
+        Button,
+        Badge,
+        Modal,
+        Popover,
+        Tabs
+      } from 'antd';
 import {
     CaretRightOutlined,
     InfoCircleOutlined,
@@ -41,9 +48,24 @@ const DataChild = (props: any) => {
   const handleSymbolChange = () => {
     changeSymbol(item.symbol)
   }
-
+  const renderSwitch = (param: string)=>   {
+    switch (param){
+      case 'STC':
+        return <div> Stock </div>;
+      case 'CRT':
+        return <div> Crypto </div>
+      case 'CMD':
+        return <div> Commodities </div>
+      case 'FX':
+        return <div> Forex </div>
+      case 'IND':
+        return <div> Indicies </div>
+      default:
+        return <div> asset </div>
+    }
+  }
   return (
-    <div className='bg-lightGray p-4'>
+    <div className='bg-white dark:bg-lightBlack dark:text-white p-4'>
       <div className='flex justify-between mb-3'>
         <span className='text-xs font-bold'>
           {item.symbol}
@@ -51,19 +73,64 @@ const DataChild = (props: any) => {
         <span className='flex gap-2'>
           <InfoCircleOutlined onClick={() => setInfoModalOpen(true)}/>
           <Modal
-            title={item.symbol}
+            title={<div className="bg-white text-darkBlack dark:bg-darkBlack">{item.symbol} {item.categoryName} {item.description}</div>}
             centered
             open={infoModalOpen}
-            onOk={() => setInfoModalOpen(false)}
+            // onOk={() => setInfoModalOpen(false)}
+            // okButtonProps={<button></button>}
             onCancel={() => setInfoModalOpen(false)}
+            cancelText='close'
+            className="[&_.ant-modal-content]:bg-white
+            [&_.ant-modal-content]:dark:bg-darkBlack
+            [&_.ant-modal-content]:dark:text-white
+            "
           >
-            <p>some contents...</p>
-            <p>some contents...</p>
-            <p>some contents...</p>
+            <div className="grid grid-cols-3">
+            
+            <div className="grid grid-cols-3"> Asset Class 
+                 {
+              renderSwitch(item.categoryName)
+            }
+            </div>
+       
+            <div> Subclass        { item.groupName }
+</div>
+     
+            <div> Expiration { item.expiration }</div>
+            
+
+            <div> Daily Swap 
+            <span> Long </span>
+            { item.swapLong }
+            <span> Short </span>
+            { item.swapShort }
+            </div>
+            <div> Expiration { item.expiration }</div> 
+            <div> Leverage    { item.leverage }</div> 
+          </div>
           </Modal>
-          <Popover
-            content={<a onClick={() => setsltpPopoverOpen(false)}>Close</a>}
-            title="Title"
+          <Popover className="p-5
+            [&_.ant-popover-inner]:bg-darkBlack
+            [&_.ant-popover-inner]:rounded
+            [&_.ant-popover-inner]:text-darkBlack
+            [&_.ant-popover-inner]:dark:text-white
+            [&_.ant-popover-inner]:dark:bg-darkBlack
+            "
+            content={<div >
+              <span onClick={() => setsltpPopoverOpen(false)}> close </span>
+              <div className="flex justify-between">
+                <span>
+                  <h3> SL </h3>
+                  <TradeInput />
+                </span>
+                <span>
+                <h3> TP </h3>
+                <TradeInput />
+                </span>
+              </div>
+              <Switch checkedChildren="on" unCheckedChildren="off"/>
+            </div>}
+            title="Set Stop loss / Take profit for Click & Trade"
             trigger="click"
             open={sltpPopoverOpen}
             onOpenChange={handleOpenChange}
@@ -72,15 +139,52 @@ const DataChild = (props: any) => {
           </Popover>
           <PlusCircleOutlined onClick={() => setTradeModalOpen(true)}/>
           <Modal
-            title={item.symbol}
+            title={<div>{item.symbol} {item.categoryName}</div>}
             centered
             open={tradeModalOpen}
             onOk={() => setTradeModalOpen(false)}
             onCancel={() => setTradeModalOpen(false)}
           >
-            <p>some contents...</p>
-            <p>some contents...</p>
-            <p>some contents...</p>
+          <Tabs
+            defaultActiveKey="1"
+            centered
+            items={[
+              {
+                id: "1",
+                label: `Instant Execution`,
+                key: '#3',
+                children: <div>
+                  <div>
+                    <div>
+                      <span> Volume </span>
+                      <span> Contract value </span>
+                      <span> Margin </span>
+                    </div>
+                    <div>
+                      <span> Spread </span>
+                      <span> Commission </span>
+                      <span> Pip value </span>
+                      <span> Daily Swap </span>
+                    </div>
+                    <div>
+                      <span> Stop loss </span>
+                      <span> Take Profit </span>
+                    </div>
+                    <div>
+                      
+                    </div>
+                  </div>
+
+                </div>,
+              },
+              {
+                id: "3",
+                label: `Pending Order`,
+                key: '#333',
+                children: `Content of Tab Pane `,
+              }
+            ]}
+          />
           </Modal>
           <LineChartOutlined className="hover:cursor-pointer" onClick={handleSymbolChange}/>
         </span>
