@@ -39,7 +39,6 @@ const useWebSocket = (command : string, args={}) => {
             subscribe({
                 command: "getTrades",
                 arguments: args
-                
             })
         }
         const login = () => {

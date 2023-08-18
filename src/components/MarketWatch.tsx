@@ -3,6 +3,7 @@ import { Tabs, Table } from 'antd';
 import type { TabsProps } from 'antd';
 import { OpenPositionDataType, OpenPositionFixedDataType } from '@/utils/type';
 import type { ColumnsType } from 'antd/es/table';
+import { useWebSocket } from '@/hooks/useWebSocket';
 import { useSocketStream } from '@/hooks/useSocketStream';
 
 const onChange = (key: string) => {
@@ -57,18 +58,21 @@ const openPositionColumns: ColumnsType<OpenPositionDataType> = [
 ];
 
 const MarketWatch = () => {
-    const { data } = useSocketStream('streamTrades')
-    if (!data) {
-        return <div className='max-h-[20vh] rounded truncate w-[100%] mb-5'> loading </div>
+    // const { data } = useSocketStream('streamTrades')
+    // if (!data) {
+    //     return <div className='max-h-[20vh] rounded truncate w-[100%] mb-5'> loading </div>
+    // }
+    const args = {
+      "openedOnly": true
     }
-    // if (returnData === undefined) return <div> loading </div>
+    const { returnData } = useWebSocket('getTrades', args);
+
+    if (returnData === undefined) return <div> loading </div>
     // if(returnData){
     //   console.log(returnData);
     // }
 
-    console.log(data)
-    const returnDatas = []
-    const openPositionData: OpenPositionDataType[] = returnDatas.map((item: any) => {
+    const openPositionData: OpenPositionDataType[] = returnData.map((item: any) => {
       return {
       close_price: item.close_price,
       close_time: item.close_time,
