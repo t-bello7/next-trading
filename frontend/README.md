@@ -16,6 +16,7 @@ pnpm dev
 https://www.tradingview.com/widget/advanced-chart/
 https://github.com/webdatavisualdev/vue-tradingview/blob/master/src/components/TradingViewComponent.vue
 https://vue-vuex-tradingview.firebaseapp.com/
+https://www.tradingview.com/charting-library-docs/latest/tutorials/implement_datafeed_tutorial/Datafeed-Implementation
 - https://www.xtb.com/ro
 - https://betterprogramming.pub/write-optimised-dockerfiles-for-next-js-d644b628c570
 - https://github.com/vercel/next.js/discussions/16995

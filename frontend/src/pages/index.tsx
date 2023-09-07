@@ -15,6 +15,7 @@ import LightChart from '@/components/LightChart';
 import MarketWatch from '@/components/MarketWatch';
 import ProfitData from '@/components/ProfitData';
 import AssetWatch from '@/components/AssetWatch';
+import TradeChart from '@/components/TradeChart';
 import DashboardLayout from '@/components/Layout';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
 import type { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon';
@@ -71,7 +72,8 @@ const  Home: NextPageWithLayout = () => {
       <Row className='flex-col gap-2'>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-4 w-full'>
           <Col ref={ref} className='h-[40vh] md:h-[50vh] md:col-span-2 bg-lightGray dark:bg-darkBlack dark:text-white rounded'>
-            <LightChart width={width} height={height}> </LightChart>
+            {/* <LightChart width={width} height={height}> </LightChart> */}
+            <TradeChart width={width} height={height} />
           </Col>
           <Col className='h-[20vh] md:h-[50vh] md:col-span-1'>
             <AssetWatch />
