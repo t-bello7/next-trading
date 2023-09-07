@@ -7,13 +7,13 @@ import { Layout } from "antd";
 const DashBoardLayout = ({children}: any) => {
   const { status } = useSession();
   const router = useRouter()
-  useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/api/auth/signin')
-    }
-  }, [router, status])
+  // useEffect(() => {
+  //   if (status === 'unauthenticated') {
+  //     router.push('/api/auth/signin')
+  //   }
+  // }, [router, status])
 
-  if (status === 'authenticated') {
+  if (status != 'authenticated') {
     return(
     <Layout className='bg-lightGray dark:bg-darkBlack min-h-screen overflow-auto'>
         <Sidebar />

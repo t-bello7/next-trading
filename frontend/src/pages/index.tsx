@@ -44,7 +44,7 @@ const  Home: NextPageWithLayout = () => {
   const [size, setSize] = useState<SizeType>('large');
   const { data: userData} = useSession();
   const [ref, { width, height }] = useDimensions()
-  if (!userData) return  <h1>loading</h1>
+  // if (!userData) return  <h1>loading</h1>
   return (
     <WebSocketContextProvider>
     <Row justify="space-between" className='mb-8'>
