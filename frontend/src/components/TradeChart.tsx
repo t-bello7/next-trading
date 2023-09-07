@@ -6,7 +6,7 @@ import Datafeed  from '@/components/datafeed'
 let tvScriptLoadingPromise: Promise<any>;
 
 
-export default function TradeChart({width, height}) {
+export default function TradeChart({width, height}: any) {
   const onLoadScriptRef = useRef();
     const { symbol } = useWebSocketContext()
     console.log(symbol)

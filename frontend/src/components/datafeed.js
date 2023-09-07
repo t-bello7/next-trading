@@ -1,3 +1,4 @@
+import { io } from "socket.io-client";
 
 const lastBarsCache = new Map();
 
@@ -161,13 +162,6 @@ export function unsubscribeFromStream(subscriberUID) {
 		}
 	}
 }
-
-
-
-
-
-
-
 
 // DatafeedConfiguration implementation
 const configurationData = {
