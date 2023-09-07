@@ -4,7 +4,6 @@ import { createChart, ColorType } from 'lightweight-charts';
 import { useWebSocket } from '@/hooks/useWebSocket';
 import { useWebSocketContext } from '@/hooks/state';
 import moment from 'moment';
-// import { useSocketStream } from '@/hooks/useSocketStream';
 
 const LightChart = (props: any) => {
     const chartRef = useRef< HTMLDivElement >(null)
@@ -19,10 +18,6 @@ const LightChart = (props: any) => {
     }
     // const args = {
     //     symbol: symbol
-    // }
-    // const { data } = useSocketStream('streamCandles', args)
-    // if (data) {
-    //     console.log(data)
     // }
     const { returnData } = useWebSocket('getCandles', args)
     // const initialData = [

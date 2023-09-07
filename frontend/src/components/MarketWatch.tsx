@@ -4,7 +4,6 @@ import type { TabsProps } from 'antd';
 import { OpenPositionDataType, OpenPositionFixedDataType } from '@/utils/type';
 import type { ColumnsType } from 'antd/es/table';
 import { useWebSocket } from '@/hooks/useWebSocket';
-import { useSocketStream } from '@/hooks/useSocketStream';
 
 const onChange = (key: string) => {
   console.log(key);
@@ -58,10 +57,6 @@ const openPositionColumns: ColumnsType<OpenPositionDataType> = [
 ];
 
 const MarketWatch = () => {
-    // const { data } = useSocketStream('streamTrades')
-    // if (!data) {
-    //     return <div className='max-h-[20vh] rounded truncate w-[100%] mb-5'> loading </div>
-    // }
     const args = {
       "openedOnly": true
     }
