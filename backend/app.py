@@ -4,14 +4,14 @@ import logging
 import time
 import ssl
 from threading import Thread
-
+from dotenv import dotenv_values
 # set to true on debug environment only
 DEBUG = True
-
+env_config = dotenv_values('.env')
 #default connection properites
-DEFAULT_XAPI_ADDRESS        = 'xapi.xtb.com'
-DEFAULT_XAPI_PORT           = 5124
-DEFUALT_XAPI_STREAMING_PORT = 5125
+DEFAULT_XAPI_ADDRESS        = env_config['XTB_URL']
+DEFAULT_XAPI_PORT           = int(env_config['PORT'])
+DEFUALT_XAPI_STREAMING_PORT = int(env_config['STREAMING_PORT'])
 
 # wrapper name and version
 WRAPPER_NAME    = 'python'
@@ -21,7 +21,7 @@ WRAPPER_VERSION = '2.5.0'
 API_SEND_TIMEOUT = 100
 
 # max connection tries
-API_MAX_CONN_TRIES = 3
+API_MAX_CONN_TRIES = 5
 
 # logger properties
 logger = logging.getLogger("jsonSocket")
@@ -189,13 +189,14 @@ class APIStreamClient(JsonSocket):
 
         self._running = True
         self._t = Thread(target=self._readStream, args=())
-        self._t.setDaemon(True)
+        self._t.daemon = True
         self._t.start()
 
     def _readStream(self):
         while (self._running):
                 msg = self._readObj()
                 logger.info("Stream received: " + str(msg))
+                print(msg)
                 if (msg["command"]=='tickPrices'):
                     self._tickFun(msg)
                 elif (msg["command"]=='trade'):
@@ -208,7 +209,7 @@ class APIStreamClient(JsonSocket):
                     self._profitFun(msg)
                 elif (msg["command"]=="news"):
                     self._newsFun(msg)
-    
+
     def disconnect(self):
         self._running = False
         self._t.join()
@@ -216,6 +217,13 @@ class APIStreamClient(JsonSocket):
 
     def execute(self, dictionary):
         self._sendObj(dictionary)
+
+    def subscribeCandle(self, symbol):
+        self.execute(dict(command='getCandles', symbol=symbol, streamSessionId=self._ssId))
+
+    def subscribeCandles(self, symbols):
+        for symbolX in symbols:
+            self.subscribeCandle(symbolX)
 
     def subscribePrice(self, symbol):
         self.execute(dict(command='getTickPrices', symbol=symbol, streamSessionId=self._ssId))
@@ -293,7 +301,8 @@ def procTradeStatusExample(msg):
 # example function for processing trades from Streaming socket
 def procProfitExample(msg): 
     print("PROFIT: ", msg)
-
+def balanceFun(msg):
+    return msg
 # example function for processing news from Streaming socket
 def procNewsExample(msg): 
     print("NEWS: ", msg)
@@ -302,8 +311,8 @@ def procNewsExample(msg):
 def main():
 
     # enter your login credentials here
-    userId =
-    password = 
+    userId = int(env_config['XTB_USERID'])
+    password = env_config['XTB_PASSWORD']
 
     # create & connect to RR socket
     client = APIClient()
@@ -318,29 +327,49 @@ def main():
         return
 
     # get ssId from login response
-    ssid = loginResponse['streamSessionId']
+    while loginResponse['status'] == True:
+        ssid = loginResponse['streamSessionId']
     
     # second method of invoking commands
-    resp = client.commandExecute('getAllSymbols')
+        resp = client.commandExecute('getAllSymbols')
     
+        resp2 = client.commandExecute("tradeTransaction", {
+        "tradeTransInfo": {
+            "cmd": 0,
+            "customComment": "Some text",
+            "expiration": 0,
+            "order": 0,
+            "price": 1.4,
+            "sl": 0,
+            "tp": 0,
+            "symbol": "EURUSD",
+            "type": 0,
+            "volume": 0.1
+        }
+        })
     # create & connect to Streaming socket with given ssID
     # and functions for processing ticks, trades, profit and tradeStatus
-    sclient = APIStreamClient(ssId=ssid, tickFun=procTickExample, tradeFun=procTradeExample, profitFun=procProfitExample, tradeStatusFun=procTradeStatusExample)
+        sclient = APIStreamClient(ssId=ssid, tickFun=procTickExample, tradeFun=procTradeExample, profitFun=procProfitExample, tradeStatusFun=procTradeStatusExample, balanceFun=balanceFun)
     
     # subscribe for trades
-    sclient.subscribeTrades()
-    
+        # sclient.subscribeTrades()
+        sclient.subscribeBalance()
+
+    # sclient.subscribeCandles(['EURUSD'])
     # subscribe for prices
-    sclient.subscribePrices(['EURUSD', 'EURGBP', 'EURJPY'])
+    # sclient.subscribePrices(['EURUSD', 'EURGBP', 'EURJPY'])
 
     # subscribe for profits
-    sclient.subscribeProfits()
+    # sclient.subscribeProfits()
+        time.sleep(10)
+
+        sclient.disconnect()
+
 
     # this is an example, make it run for 5 seconds
-    time.sleep(5)
+    time.sleep(10)
     
     # gracefully close streaming socket
-    sclient.disconnect()
     
     # gracefully close RR socket
     client.disconnect()
