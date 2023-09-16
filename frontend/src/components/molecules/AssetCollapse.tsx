@@ -21,7 +21,7 @@ const DataLabel = (props: any) => {
     return (
       <div className='flex justify-between border-0'>
         <span>
-          {item.symbol}
+          {item.description}
         </span>
         <span>
           {item.percentage}
@@ -29,6 +29,7 @@ const DataLabel = (props: any) => {
         <span>
           {item.bid}
         </span>
+        
         <span>
           {item.ask}
         </span>
@@ -93,8 +94,7 @@ const DataChild = (props: any) => {
             }
             </div>
        
-            <div> Subclass        { item.groupName }
-</div>
+            <div> Subclass { item.groupName }</div>
      
             <div> Expiration { item.expiration }</div>
             
@@ -191,19 +191,19 @@ const DataChild = (props: any) => {
       </div>
       <div className='mb-3 flex flex-col gap-2 justify-between lg:flex-row'>
         <Button size={'small'} type="primary" shape="round" className='flex flex-col h-[3rem] bg-colorPrimary font-clashDisplay'>
-          <span className='text-sm'>
+          <span className='text-sm font-extrabold'>
             Buy
           </span>
-          <span className='text-sm'>
+          <span className='text-sm font-extrabold'>
             {item.bid}
           </span>
         </Button>
         <TradeInput />
         <Button size={'small'} type="primary" shape="round" className='flex flex-col h-[3rem] bg-secondaryColor font-clashDisplay'>
-          <span className='text-sm'>
+          <span className='text-sm font-extrabold'>
             Sell
           </span>
-          <span className='text-sm'>
+          <span className='text-sm font-extrabold'>
             {item.ask}
           </span>
         </Button>
@@ -224,7 +224,8 @@ const DataChild = (props: any) => {
 
 const DataRender = (props: any) => {
   const { items } = props
-  return (<div className='px-3'>
+  return (
+  <div className='px-3'>
     <div className='flex justify-between mx-4'>
       <span className='uppercase'> symbol </span>
       <span className='uppercase'> change </span>

@@ -1,34 +1,45 @@
 import { useEffect, useState } from "react";
-import { io, Manager } from "socket.io-client";
+import { xtb_socket } from "../utils/socket"
 import DashBoardLayout from "@/components/Layout";
 import type { ReactElement } from 'react'
 
-
-const manager = new Manager("localhost:5000", {
-  transports: ["websocket"],
-  reconnectionDelayMax: 10000,
-});
-
-const socket = manager.socket("/",{});
 
 const Profile = () => {
 
   const [value, setValue] = useState('');
   const [isLoading, setIsLoading] = useState(false)
+  const [data, setData] = useState();
   const onSubmit = (event: any) => {
     event.preventDefault();
     setIsLoading(true);
-    socket.emit("message", {data: 'dddd'}, () => {
-      setIsLoading(false);
-    })
-
+    // xtb_socket.emit('streamBalance')
   }
-    useEffect(() => {
-      socket.on('connect', function() {
-        console.log('connected')
+
+  // useEffect(() => {
+
+  //   socket.emit('streamTrades')
+
+  // },[])
+
+  useEffect(() => {
+   if(data === undefined) {
+    xtb_socket.emit('getAllSymbols')
+   }
+
+  },[data])
+
+  useEffect(() => {
+      xtb_socket.on('symbols', function(data: any) {
+        console.log(data)
+        setData(data)
     });
-    }, [])
-    console.log(isLoading)
+    return () => {
+      xtb_socket.off('symbols', function(data) {
+        setData(data)
+      })
+    }
+    }, [data])
+    console.log(data)
     return (
             <h1>
                <form onSubmit={ onSubmit }>

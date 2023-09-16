@@ -68,7 +68,7 @@ export default function TradeChart({width, height}: any) {
             // datafeedUrl: 'https://demo_feed.tradingview.com',
             datafeed: Datafeed,
             allow_symbol_change: true,
-            symbol: "AAPL",
+            symbol: symbol,
             timezone: "Etc/UTC",
             libraryPath: '/charting_library/',
             theme: "light",
@@ -86,7 +86,7 @@ export default function TradeChart({width, height}: any) {
         }
       }
     },
-    []
+    [symbol]
   );
   return (
     <div className='tradingview-widget-container'>

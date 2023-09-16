@@ -91,6 +91,11 @@ def stream_balance():
     # emit('balance',  {'data': resp}, broadcast=True)
     # print(resp)
 
+@socketio.on('tradeTransaction')
+def trade_transaction(data):
+    resp = client.commandExecute('tradeTransaction', data)
+    emit('trade', {'data': resp}, broadcast=True)
+    
 
 if __name__ == '__main__':
     socketio.run(app)

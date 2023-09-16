@@ -353,7 +353,9 @@ def main():
     
     # subscribe for trades
         # sclient.subscribeTrades()
-        sclient.subscribeBalance()
+        # sclient.subscribeBalance()
+        sclient.subscribeTradeStatus()
+
 
     # sclient.subscribeCandles(['EURUSD'])
     # subscribe for prices

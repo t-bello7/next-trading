@@ -1,15 +1,20 @@
+import { useEffect, useState } from 'react';
 import { Col, Row, Statistic } from 'antd';
 import { useWebSocket } from '@/hooks/useWebSocket';
+import { xtb_socket } from '@/utils/socket';
 const TextData  = ({name}: any) => (
     <div className='text-black text-sm dark:text-white'>
         {name}
     </div>
 )
 const ProfitData = () => {
-    // const { data } = useWebSocket('streamCandles')
+    const [returnData, setReturnData] = useState('')
     // console.log(data)
     // if (!data) {
-        return <div> Loading </div>
+    // useEffect(() => {
+    //     xtb_socket.emit('streamBalance')
+    // })
+    return <div> Loading </div>
     // }
 
     // return (  

@@ -14,6 +14,11 @@ pnpm dev
 ## Resources
 - http://developers.xstore.pro/documentation/2.5.0
 https://www.tradingview.com/widget/advanced-chart/
+https://wmerobertson.wordpress.com/2017/09/20/streaming-flask-socketio/
+https://stackoverflow.com/questions/48627210/how-to-stream-data-over-socket-io-to-client
+https://github.com/nkzawa/socket.io-stream
+
+
 https://github.com/webdatavisualdev/vue-tradingview/blob/master/src/components/TradingViewComponent.vue
 https://vue-vuex-tradingview.firebaseapp.com/
 https://www.tradingview.com/charting-library-docs/latest/tutorials/implement_datafeed_tutorial/Datafeed-Implementation
