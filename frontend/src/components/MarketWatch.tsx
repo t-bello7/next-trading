@@ -5,66 +5,78 @@ import type { ColumnsType } from 'antd/es/table';
 import { useWebSocket } from '@/hooks/useWebSocket';
 import { v4 as uuidv4 } from 'uuid';
 
-const onChange = (key: string) => {
-  console.log(key);
-};
+const cmdMap: any= {
+  0: "Buy",
+  1: "Sell",
+  2: "Buy Limit",
+  3: "Sell Limit",
+  4: "Buy Stop",
+  5: "Sell Stop",
+  6: "Balance",
+  7: "Credit"
+}
+
+const TableColumn = ({title} : any) => {
+  return (<div className="m-0"> {title} </div>)
+}
 
 const openPositionColumns: ColumnsType<OpenPositionDataType> = [
   {
     key: uuidv4(),
-    title: 'Position',
+    title: <TableColumn title={'Position'} />,
     dataIndex: 'position',
+    width: '16%'
   },
   {
     key: uuidv4(),
-    title: 'Type',
+    title: <TableColumn title={'Type'} />,
     dataIndex: 'type',
+    width: '16%',
   },
   {
     key: uuidv4(),
-    title: 'Volume',
+    title: <TableColumn title={'Volume'} />,
     dataIndex: 'volume',
+    width: '16%'
   },
+  // {
+  //   key: uuidv4(),
+  //   title: 'SL',
+  //   dataIndex: 'sl',
+  // },
+  // {
+  //   key: uuidv4(),
+  //   title: 'TP',
+  //   dataIndex: 'tp',
+  // },
   {
     key: uuidv4(),
-    title: 'Market Volume',
-    dataIndex: 'volume',
-  },
-  {
-    key: uuidv4(),
-    title: 'SL',
-    dataIndex: 'sl',
-  },
-  {
-    key: uuidv4(),
-    title: 'TP',
-    dataIndex: 'tp',
-  },
-  {
-    key: uuidv4(),
-    title: 'Open Price',
+    title: <TableColumn title={'Open Price'} />,
     dataIndex: 'open_price',
+    width: '16%'
   },
   {
     key: uuidv4(),
-    title: 'Market Price',
-    dataIndex: 'market_price',
+    title: <TableColumn title={'Market Price'} />,
+    dataIndex: 'close_price',
+    width: '16%',
   },
   {
     key: uuidv4(),
-    title: 'Gross Profit',
-    dataIndex: 'gross_profit',
-  },
-  {
-    key: uuidv4(),
-    title: 'Net Profit',
+    title: <TableColumn title={'Net Profit'} />,
     dataIndex: 'net_profit',
+    width: '10%',
+    render: (text) => <a className={text < 0 ? 'text-secondaryColor': 'text-colorPrimary'}>{text}</a>,
   },
   {
     key: uuidv4(),
-    title: 'Rollover',
-    dataIndex: 'roleover',
-  },
+    title: <div className='bg-secondaryColor' onClick={()=>console.log('closeAll')}> close</div>,
+    render: () => (<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24">
+      <path fill="#FF3434" d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" opacity=".4"/>
+      <path fill="#FF3434" d="m13 12 2.4-2.3c.2-.3.2-.8 0-1a.8.8 0 0 0-1.1 0L12 10.8 9.7 8.6a.8.8 0 0 0-1 0c-.4.3-.4.8 0 1.1l2.2 2.3-2.3 2.3c-.3.3-.3.8 0 1l.6.3c.2 0 .3 0 .5-.2L12 13l2.3 2.3.5.2c.2 0 .4 0 .6-.2.2-.3.2-.8 0-1.1L13 12Z"/>
+    </svg>)
+    
+  }
 ];
 
 const MarketWatch = () => {
@@ -82,7 +94,7 @@ const MarketWatch = () => {
       close_time: item.close_time,
       close_timeString: item.close_timeString,
       closed: item.closed,
-      cmd: item.cmd,
+      type: cmdMap[item.cmd],
       comment: item.comment,
       commission: item.commission,
       customComment: item.customComment,
@@ -97,8 +109,8 @@ const MarketWatch = () => {
       open_timeString: item.open_timeString,
       order: item.order,
       order2: item.order2,
-      position: item.postion,
-      profit: item.profit,
+      position: item.position,
+      net_profit: item.profit,
       sl: item.sl,
       spread: item.spread,
       storage: item.storage,
@@ -112,33 +124,31 @@ const MarketWatch = () => {
     const items: TabsProps['items'] = [
       {
         key: '1',
-        label: <div>Open Position</div>,
+        label: <div className='text-darkBlack'>Open Position</div>,
         children:  <Table
           className='[&_*:bg-darkBlack]'
           columns={openPositionColumns}
           dataSource={openPositionData}
           pagination={false}
-          scroll={{ x: 2000, y: 200 }}
+          scroll={{ y: 50 }}
           bordered
           />
         ,
       },
-      {
-        key: '2',
-        label: <div>Pending Order</div>,
-        children:  <Table
-
-        columns={openPositionColumns}
-        dataSource={openPositionData}
-        pagination={false}
-        scroll={{ x: 2000, y: 200 }}
-        bordered
-        />
-      },
+      // {
+      //   key: '2',
+      //   label: <div>Pending Order</div>,
+      //   children:  <Table
+      //   columns={openPositionColumns}
+      //   dataSource={openPositionData}
+      //   pagination={false}
+      //   scroll={{ y: 50 }}
+      //   bordered
+      //   />
+      // },
     ];
-    // console.log(marketData);
     return (
-    <div className='max-h-[20vh] rounded truncate w-[100%] mb-5'>
+    <div className='max-h-[30vh] rounded truncate w-[100%] mb-5'>
       <Tabs 
         type="card"
         className='dark:text-white
@@ -150,7 +160,7 @@ const MarketWatch = () => {
         [&_.ant-tabs-nav]:mb-0'
         defaultActiveKey="1" 
         items={items}
-        onChange={onChange} />
+         />
     </div>
     )
 }

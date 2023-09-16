@@ -16,6 +16,11 @@ const useWebSocket = (command : string, args={}) => {
                 console.error(Exception)
             }
         }
+        const getMarginLevel = () => {
+            subscribe({
+                command: "getMarginLevel"
+            })
+        }
         const getAllSymbols = () => {
             subscribe({
                 command: "getAllSymbols"
@@ -95,6 +100,9 @@ const useWebSocket = (command : string, args={}) => {
                         if(command === "getTrades") {
                             getTrades()
                         }
+                        if(command === "getMarginLevel") {
+                            getMarginLevel()
+                        }
                         //  else {
                         //     setStreamId(response.streamSessionId)
                         // }
@@ -114,7 +122,10 @@ const useWebSocket = (command : string, args={}) => {
                         }
                         if (command ==="getTrades"){
                             setReturnData(response.returnData)
-                        } 
+                        }
+                        if (command === "getMarginLevel"){
+                            setReturnData(response.returnData)
+                        }
                     }   
                 } else {
                     console.log('Error: ' + response.errorDescr)

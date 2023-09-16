@@ -38,6 +38,10 @@ const DataLabel = (props: any) => {
 };
 
 const DataChild = (props: any) => {
+  const { item } = props
+  const [tradeValue, setTradeValue] = useState({
+    volume: 10,
+  });
   const [infoModalOpen, setInfoModalOpen] = useState(false);
   const [sltpPopoverOpen, setsltpPopoverOpen] = useState(false);
   const [tradeModalOpen, setTradeModalOpen] = useState(false);
@@ -45,8 +49,16 @@ const DataChild = (props: any) => {
   const handleOpenChange = (newOpen: boolean) => {
     setsltpPopoverOpen(newOpen);
   };
-  const { item } = props
+  const handleTrade = (value: {}) => {
+    setTradeValue({
+      ...tradeValue,
+      ...value
+    })
+  }
+  console.log(tradeValue)
+
   const handleSymbolChange = () => {
+ 
     changeSymbol(item.symbol)
   }
   const renderSwitch = (param: string)=>   {
@@ -198,7 +210,7 @@ const DataChild = (props: any) => {
             {item.bid}
           </span>
         </Button>
-        <TradeInput />
+        <TradeInput handleTrade={handleTrade}/>
         <Button size={'small'} type="primary" shape="round" className='flex flex-col h-[3rem] bg-secondaryColor font-clashDisplay'>
           <span className='text-sm font-extrabold'>
             Sell

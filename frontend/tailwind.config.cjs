@@ -16,7 +16,9 @@ module.exports = {
       'darkBlack': '#141414',
       'lightBlack': '#212121',
       'white': '#FFFFFF',
-      'black': '#000000'
+      'black': '#000000',
+      'red': 'fff',
+  
     },
     fontFamily: {
       clashDisplay: ["clash-display"],

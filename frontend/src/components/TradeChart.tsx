@@ -1,49 +1,21 @@
-// TradeChart.jsx
-
 import React, { useEffect, useRef } from 'react';
 import { useWebSocketContext } from '@/hooks/state';
 import Datafeed  from '@/components/datafeed'
 let tvScriptLoadingPromise: Promise<any>;
 
+declare global {
+  interface Window {
+    TradingView: any; // Replace 'any' with the actual type if you know it
+  }
+}
 
 export default function TradeChart({width, height}: any) {
-  const onLoadScriptRef = useRef();
-    const { symbol } = useWebSocketContext()
-    console.log(symbol)
-    const data=  [
-        {
-            time:1508313600000,
-            close:42.1,
-            open:41.0,
-            high:43.0,
-            low:40.4,
-            volume:12000
-        }, {
-            time:1508317200000,
-            close:43.4,
-            open:42.9,
-            high:44.1,
-            low:42.1,
-            volume:18500
-        }, {
-            time:1508320800000,
-            close:44.3,
-            open:43.7,
-            high:44.8,
-            low:42.8,
-            volume:24000
-        }, {
-            time:1508324400000,
-            close:42.8,
-            open:44.5,
-            high:44.5,
-            low:42.3,
-            volume:45000
-        }
-    ]
+  const { symbol } = useWebSocketContext()
+  const onLoadScriptRef = useRef<null | (() => void)>();
   useEffect(
-    () => {
-      onLoadScriptRef.current = createWidget;
+    () => { 
+      
+      onLoadScriptRef.current = createWidget
 
       if (!tvScriptLoadingPromise) {
         tvScriptLoadingPromise = new Promise((resolve) => {
@@ -59,10 +31,9 @@ export default function TradeChart({width, height}: any) {
 
       tvScriptLoadingPromise.then(() => onLoadScriptRef.current && onLoadScriptRef.current());
 
-      return () => onLoadScriptRef.current = null;
-
+      // return () => onLoadScriptRef.current = null;
       function createWidget() {
-        if (document.getElementById('tradingview_ff1d7') && 'TradingView' in window) {
+        if ( document.getElementById('tradingview_ff1d7') && 'TradingView' in window) {      
           new window.TradingView.widget({
             autosize: true,
             // datafeedUrl: 'https://demo_feed.tradingview.com',
@@ -85,8 +56,7 @@ export default function TradeChart({width, height}: any) {
           });
         }
       }
-    },
-    [symbol]
+    }, [symbol]
   );
   return (
     <div className='tradingview-widget-container'>
