@@ -73,7 +73,6 @@ const useSocketio = (command : string, args={}) => {
             })
         }
         const login = () => {
-            // console.log(process.env.NEXT_PUBLIC_XTB_USERID)
             subscribe({
                 command: "login",
                 arguments: {
@@ -83,7 +82,6 @@ const useSocketio = (command : string, args={}) => {
             })
         }
         const streamCandles = (streamId: string, symbol: string) => {
-            console.log(symbol)
             console.log(streamId)
             subscribeStream({
                 command: "getTrades",

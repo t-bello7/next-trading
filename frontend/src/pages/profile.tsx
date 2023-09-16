@@ -5,7 +5,6 @@ import type { ReactElement } from 'react'
 
 
 const Profile = () => {
-
   const [value, setValue] = useState('');
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState();
@@ -21,25 +20,25 @@ const Profile = () => {
 
   // },[])
 
-  useEffect(() => {
-   if(data === undefined) {
-    xtb_socket.emit('getAllSymbols')
-   }
+  // useEffect(() => {
+  //  if(data === undefined) {
+  //   xtb_socket.emit('getAllSymbols')
+  //  }
 
-  },[data])
+  // },[data])
 
-  useEffect(() => {
-      xtb_socket.on('symbols', function(data: any) {
-        console.log(data)
-        setData(data)
-    });
-    return () => {
-      xtb_socket.off('symbols', function(data) {
-        setData(data)
-      })
-    }
-    }, [data])
-    console.log(data)
+  // useEffect(() => {
+  //     xtb_socket.on('symbols', function(data: any) {
+  //       console.log(data)
+  //       setData(data)
+  //   });
+  //   return () => {
+  //     xtb_socket.off('symbols', function(data) {
+  //       setData(data)
+  //     })
+  //   }
+  //   }, [data])
+  //   console.log(data)
     return (
             <h1>
                <form onSubmit={ onSubmit }>

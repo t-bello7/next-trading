@@ -67,7 +67,6 @@ const useWebSocket = (command : string, args={}) => {
             })
         }
         const login = () => {
-            // console.log(process.env.NEXT_PUBLIC_XTB_USERID)
             subscribe({
                 command: "login",
                 arguments: {
@@ -128,19 +127,18 @@ const useWebSocket = (command : string, args={}) => {
                         }
                     }   
                 } else {
-                    console.log('Error: ' + response.errorDescr)
+                    console.error('Error: ' + response.errorDescr)
                 }
 
             }  catch (Exception) {
-                console.log(`:(  ${Exception}`)
+                console.error(`:(  ${Exception}`)
             }
         };
         ws.current.onclose = () => {
             console.log('Connection closed');
         };
         ws.current.onerror = (err) => {
-            console.log(err);
-            console.log("WS Error");
+            console.error("WS Error", err);
         };   
         // return () => {
         //     ws.current!.close()
@@ -156,53 +154,3 @@ export {
     useWebSocket
 };
 
-
-    // const streamProfits = () => {
-    //     setMsg({
-    //         command: "getProfits",
-    //         streamSessionId: streamId
-    //     })
-    // }
-
-    // const streamTradeStatus = () => {
-    //     setMsg({
-    //         command: "getTradeStatus",
-    //         streamSessionId: streamId
-    //     })
-    // }
-    
-//     const startTradeTransaction = () => {
-//         setMsg({
-//             command: "tradeTransaction",
-//             arguments: {
-//                 tradeTransInfo: {
-// // BUY	0	buy
-// // SELL	1	sell
-// // BUY_LIMIT	2	buy limit
-// // SELL_LIMIT	3	sell limit
-// // BUY_STOP	4	buy stop
-// // SELL_STOP	5	sell stop
-// // BALANCE	6	Read only. Used in getTradesHistory for manager's deposit/withdrawal operations (profit>0 for deposit, profit<0 for withdrawal).
-// // CREDIT	7	Read only
-//                     "cmd": 2,
-// // OPEN	0	order open, used for opening orders
-// // PENDING	1	order pending, only used in the streaming getTrades command
-// // CLOSE	2	order close
-// // MODIFY	3	order modify, only used in the tradeTransaction command
-// // DELETE	4	order delete, only used in the tradeTransaction command
-//                     "type": 0,
-//                     // "offset": 0,
-//                     "symbol": "EURUSD",
-//                     "expiration": 1462006335000,
-//                     "price": 1.12,
-//                     "sl": 0.0,
-//                     "tp": 0.0,
-//                     "volume": 5.0
-//                 }
-//             }
-//         })
-//     }
-    // console.log(command)
-    // useEffect(() => {
-    //   
-    // }, [msg]

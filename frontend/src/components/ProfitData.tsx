@@ -1,49 +1,41 @@
-import { useEffect, useState } from 'react';
 import { Col, Row, Statistic } from 'antd';
 import { useWebSocket } from '@/hooks/useWebSocket';
-import { xtb_socket } from '@/utils/socket';
 const TextData  = ({name}: any) => (
     <div className='text-black text-sm dark:text-white'>
         {name}
     </div>
 )
 const ProfitData = () => {
-    const [returnData, setReturnData] = useState('')
-    // console.log(data)
-    // if (!data) {
-    // useEffect(() => {
-    //     xtb_socket.emit('streamBalance')
-    // })
-    return <div> Loading </div>
-    // }
+    const { returnData } = useWebSocket('getMarginLevel');
 
-    // return (  
-    // <div className='hidden p-5 md:block h-[10vh] bg-lightGray dark:bg-darkBlack rounded'>
-    //     <Row gutter={16}>
-    //         <Col span={3}>
-    //         <Statistic className="[&_.ant-statistic-content-value]:text-sm [&_.ant-statistic-content-value]:dark:text-white [&_.ant-statistic-content-value]:text-black" title ={<TextData name="Balance" />} value={data.balance} suffix={<TextData name="USD" />} />
-    //         </Col>
-    //         <Col span={3}>
-    //         <Statistic className="[&_.ant-statistic-content-value]:text-sm [&_.ant-statistic-content-value]:dark:text-white [&_.ant-statistic-content-value]:text-black" title={<TextData name="Account Value" />} value={93} suffix={<TextData name="USD" />} />
-    //         </Col>
-    //         <Col span={3}>
-    //         <Statistic className="[&_.ant-statistic-content-value]:text-sm [&_.ant-statistic-content-value]:dark:text-white [&_.ant-statistic-content-value]:text-black" title={<TextData name="Margin"/>} value={data.margin} suffix={<TextData name="USD" />} />
-    //         </Col>
-    //         <Col span={3}>
-    //         <Statistic className="[&_.ant-statistic-content-value]:text-sm [&_.ant-statistic-content-value]:dark:text-white [&_.ant-statistic-content-value]:text-black" title={<TextData name="Free Margin"/>} value={data.marginFree} suffix={<TextData name="USD" />} />
-    //         </Col>
-    //         <Col span={3}>
-    //         <Statistic className="[&_.ant-statistic-content-value]:text-sm [&_.ant-statistic-content-value]:dark:text-white [&_.ant-statistic-content-value]:text-black" title={<TextData name="Margin Level" />} value={data.marginLevel} suffix={<TextData name="%" />} />
-    //         </Col>
-    //         <Col span={3}>
-    //         <Statistic className="[&_.ant-statistic-content-value]:text-sm [&_.ant-statistic-content-value]:dark:text-white [&_.ant-statistic-content-value]:text-black" title={<TextData name="Equity"/>} value={data.equity}  />
-    //         </Col>
-    //         <Col span={6}>
-    //             {/* <div> </div> */}
-    //         </Col>
-    //     </Row>
-    // </div>
-    // )
+    if (returnData === undefined) return <div> loading </div>
+    return (  
+    <div className='hidden p-5 md:block h-[10vh] bg-lightGray dark:bg-darkBlack rounded'>
+        <Row gutter={16}>
+            <Col span={3}>
+            <Statistic className="[&_.ant-statistic-content-value]:text-sm [&_.ant-statistic-content-value]:dark:text-white [&_.ant-statistic-content-value]:text-black" title ={<TextData name="Balance" />} value={returnData.balance} suffix={<TextData name="USD" />} />
+            </Col>
+            <Col span={3}>
+            <Statistic className="[&_.ant-statistic-content-value]:text-sm [&_.ant-statistic-content-value]:dark:text-white [&_.ant-statistic-content-value]:text-black" title={<TextData name="Account Value" />} value={93} suffix={<TextData name="USD" />} />
+            </Col>
+            <Col span={3}>
+            <Statistic className="[&_.ant-statistic-content-value]:text-sm [&_.ant-statistic-content-value]:dark:text-white [&_.ant-statistic-content-value]:text-black" title={<TextData name="Margin"/>} value={returnData.margin} suffix={<TextData name="USD" />} />
+            </Col>
+            <Col span={3}>
+            <Statistic className="[&_.ant-statistic-content-value]:text-sm [&_.ant-statistic-content-value]:dark:text-white [&_.ant-statistic-content-value]:text-black" title={<TextData name="Free Margin"/>} value={returnData.margin_free} suffix={<TextData name="USD" />} />
+            </Col>
+            <Col span={3}>
+            <Statistic className="[&_.ant-statistic-content-value]:text-sm [&_.ant-statistic-content-value]:dark:text-white [&_.ant-statistic-content-value]:text-black" title={<TextData name="Margin Level" />} value={returnData.margin_level} suffix={<TextData name="%" />} />
+            </Col>
+            <Col span={3}>
+            <Statistic className="[&_.ant-statistic-content-value]:text-sm [&_.ant-statistic-content-value]:dark:text-white [&_.ant-statistic-content-value]:text-black" title={<TextData name="Equity"/>} value={returnData.equity}  />
+            </Col>
+            <Col span={6}>
+                {/* <div> </div> */}
+            </Col>
+        </Row>
+    </div>
+    )
 
 }
 
