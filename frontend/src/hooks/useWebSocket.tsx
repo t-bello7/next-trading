@@ -13,7 +13,7 @@ const useWebSocket = (command : string, args={}) => {
             try {
                 ws.current!.send(JSON.stringify(subscribeData))
             } catch (Exception) {
-                console.error(Exception)
+                console.log(Exception)
             }
         }
         const getMarginLevel = () => {
@@ -127,18 +127,18 @@ const useWebSocket = (command : string, args={}) => {
                         }
                     }   
                 } else {
-                    console.error('Error: ' + response.errorDescr)
+                    console.log('Error: ' + response.errorDescr)
                 }
 
             }  catch (Exception) {
-                console.error(`:(  ${Exception}`)
+                console.log(`:(  ${Exception}`)
             }
         };
         ws.current.onclose = () => {
             console.log('Connection closed');
         };
         ws.current.onerror = (err) => {
-            console.error("WS Error", err);
+            console.log("WS Error", err);
         };   
         // return () => {
         //     ws.current!.close()
