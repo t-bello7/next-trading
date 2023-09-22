@@ -134,9 +134,9 @@ const useWebSocket = (command : string, args={}) => {
                 console.log(`:(  ${Exception}`)
             }
         };
-        ws.current.onclose = () => {
-            console.log('Connection closed');
-        };
+        // ws.current.onclose = () => {
+        //     console.log('Connection closed');
+        // };
         ws.current.onerror = (err) => {
             console.log("WS Error", err);
         };   

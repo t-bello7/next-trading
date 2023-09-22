@@ -10,7 +10,8 @@
     "lint": "next lint",
     "test": "jest",
     "test:ci": "jest --ci",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "export": "next export"
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.13.2",
